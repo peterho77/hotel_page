@@ -9,7 +9,7 @@
     </head>
 
     <body>
-        {{-- Page preloader --}}
+        {{-- Page reload --}}
         <div id="pre-loader">
             <div class="loader"></div>
         </div>

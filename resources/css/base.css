@@ -28,13 +28,25 @@
     /* color */
     --accent-color-400: hsl(30, 63%, 66%);
 
-    --neutral-color-100: hsl(186, 100%, 96%);
+    --neutral-color-100: hsl(0, 0%, 100%);
+    --neutral-color-150: hsl(186, 100%, 96%);
     --neutral-color-400: hsl(144, 3%, 64%);
     --neutral-color-700: hsl(225, 23%, 17%);
     --neutral-color-800: hsl(224, 24%, 15%);
     --neutral-color-900: hsl(240, 2%, 10%);
 
     --text-color: hsl(295, 6%, 37%);
+
+    /* size */
+    --size-100: 0.25rem;
+    --size-200: 0.5rem;
+    --size-300: 0.75rem;
+    --size-400: 1rem;
+    --size-500: 1.25rem;
+    --size-600: 1.5rem;
+    --size-700: 2rem;
+    --size-800: 2.5rem;
+    --size-900: 3rem;
 }
 
 @media (min-width: 62em) {
@@ -79,5 +91,4 @@ ol {
 
 a {
     text-decoration: none;
-    color: var(--neutral-color-100);
 }
