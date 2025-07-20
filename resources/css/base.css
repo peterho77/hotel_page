@@ -67,6 +67,13 @@
     box-sizing: border-box;
 }
 
+html{
+
+    /* fix FOUC */
+    visibility: visible;
+    opacity: 1;
+}
+
 body {
     font-size: var(--fs-body);
     font-family: var(--ff-body);
