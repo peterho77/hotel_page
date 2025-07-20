@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
-:root{
-
+:root {
     /* font family, font weight, font size */
     --ff-primary: "Be Vietnam Pro", sans-serif;
 
@@ -29,7 +28,7 @@
     /* color */
     --accent-color-400: hsl(30, 63%, 66%);
 
-    --neutral-color-100: rgb(235,253,255);
+    --neutral-color-100: hsl(186, 100%, 96%);
     --neutral-color-400: hsl(144, 3%, 64%);
     --neutral-color-700: hsl(225, 23%, 17%);
     --neutral-color-800: hsl(224, 24%, 15%);
@@ -38,12 +37,47 @@
     --text-color: hsl(295, 6%, 37%);
 }
 
-@media (min-width: 62em)
-{
-    :root{
+@media (min-width: 62em) {
+    :root {
         --fs-body: var(--fs-500);
         --fs-primary-heading: var(--fs-900);
         --fs-secondary-heading: var(--fs-800);
         --fs-nav: var(--fs-300);
     }
+}
+
+/* general styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: var(--fs-body);
+    font-family: var(--ff-body);
+    color: var(--text-color);
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+input:focus,
+select:focus,
+button:focus,
+textarea:focus {
+    outline: none;
+}
+
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: var(--neutral-color-100);
 }
