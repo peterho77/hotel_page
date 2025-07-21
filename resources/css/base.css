@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
 :root {
     /* font family, font weight, font size */
@@ -8,7 +8,7 @@
     --ff-heading: var(--ff-primary);
 
     --fw-regular: 400;
-    --fw-semi-bold: 600;
+    --fw-semi-bold: 500;
     --fw-bold: 700;
 
     --fs-300: 0.8125rem;
@@ -67,8 +67,7 @@
     box-sizing: border-box;
 }
 
-html{
-
+html {
     /* fix FOUC */
     visibility: visible;
     opacity: 1;
@@ -80,7 +79,7 @@ body {
     color: var(--text-color);
 }
 
-nav{
+nav {
     font-size: var(--fs-nav);
 }
 
@@ -108,68 +107,76 @@ a {
 }
 
 /* utility class */
-.fw-bold{
+.fw-bold {
     font-weight: var(--fw-bold);
 }
-.fw-semi-bold{
+.fw-semi-bold {
     font-weight: var(--fw-semi-bold);
 }
-.fw-regular{
+.fw-regular {
     font-weight: var(--fw-regular);
 }
 
-.padding-block-600{
+.padding-block-600 {
     padding-block: var(--size-600);
 }
-.padding-block-400{
+.padding-block-400 {
     padding-block: var(--size-400);
 }
-.padding-block-200{
+.padding-block-200 {
     padding-block: var(--size-200);
 }
 
-.padding-inline-600{
+.padding-inline-600 {
     padding-inline: var(--size-600);
 }
 
 /* icon */
-.icon{
+.icon {
     width: var(--size-400);
     aspect-ratio: 1;
     color: var(--accent-color-400);
 }
 
-.social-icon{
+.social-icon {
+    width: var(--size-500);
     color: var(--neutral-color-900);
 }
 
 /* button */
-.button{
+.button {
     display: inline-flex;
     border: none;
     border-radius: 100vmax;
-    background-color:var(--accent-color-400);
+    background-color: var(--accent-color-400);
     color: var(--neutral-color-150);
-    padding: 0.5em 1em;
+    padding: 0.75em 1.5em;
     font-size: var(--fs-button);
     font-weight: var(--fw-bold);
     cursor: pointer;
     box-shadow: 0 1em 1em -1em var(--accent-color-500);
 }
 
-.button:hover,.button:focus-visible{
+.button:hover,
+.button:focus-visible {
     background-color: var(--accent-color-300);
 }
 
 /* nav wrapper */
-.nav-wrapper{
+.nav-wrapper {
     display: flex;
-    align-items:center;
+    align-items: center;
     justify-content: space-between;
     gap: var(--size-700);
 }
 
-.social-list{
+.nav-list {
+    display: flex;
+    align-items: stretch;
+    gap: var(--size-400);
+}
+
+.social-list {
     display: flex;
     gap: var(--size-400);
 }

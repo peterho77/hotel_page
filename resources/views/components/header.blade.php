@@ -1,5 +1,5 @@
 <header class="primary-header">
-    <nav class="top-nav padding-block-200">
+    <nav class="top-nav | padding-block-200">
         <div class="container">
             <div class="row">
                 <nav class="top-nav__left | col-lg-6">
@@ -63,6 +63,28 @@
                             </div>
                         </div>
                     </div>
+                </nav>
+            </div>
+        </div>
+    </nav>
+    <nav class="bottom-nav | padding-block-600">
+        <div class="container">
+            <div class="row">
+                <div class="logo | col-lg-2">
+                    <img src="{{ asset('hotel_img/logo.png') }}" alt="">
+                </div>
+                <nav class="primary-bottom-nav | col-lg-10">
+                    <div class="search-bar">
+
+                    </div>
+                    <ul class="nav-list" role="list">
+                        <li><a href=""><span>Home</span></a></li>
+                        <li><a href=""><span>Room</span></a></li>
+                        <li><a href=""><span>About Us</span></a></li>
+                        <li><a href=""><span>Pages</span></a></li>
+                        <li><a href=""><span>News</span></a></li>
+                        <li><a href=""><span>Contact</span></a></li>
+                    </ul>
                 </nav>
             </div>
         </div>
