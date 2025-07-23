@@ -19,6 +19,9 @@
 
         {{-- Header --}}
         <x-header/>
+
+        {{-- Hero --}}
+        <x-hero/>
     </body>
 
 </html>

@@ -152,3 +152,59 @@
         }
     }
 }
+
+// hero
+.hero {
+    .booking-form {
+        border: 1px solid red;
+        border-radius: var(--size-200);
+        padding-inline: var(--size-800);
+    }
+}
+
+// custom jquery nice select ui
+.booking-form {
+    .select-option {
+        .nice-select {
+            padding-inline: var(--size-400);
+            padding-block: var(--size-400);
+            border-radius: var(--size-100);
+            border: 1px solid #ebebeb;
+            outline: none;
+            width: 100%;
+            float: none;
+            display: flex;
+            align-items: center;
+
+            &::after {
+                border-bottom: 2px solid var(--accent-color-400);
+                border-right: 2px solid var(--accent-color-400);
+                width: var(--size-300);
+                height: var(--size-300);
+                margin-top: 0;
+                right: 20px;
+                top: 26%;
+            }
+
+            span {
+                color: var(--neutral-color-800);
+                font-weight: var(--fw-semi-bold);
+            }
+
+            .list {
+                margin-top: 0;
+                width: 100%;
+
+                .option {
+                    padding: 0 var(--size-400);
+                    color: var(--text-color);
+
+                    &.selected{
+                        font-weight: var(--fw-semi-bold);
+                    }
+                }
+            }
+        }
+    }
+}
+
