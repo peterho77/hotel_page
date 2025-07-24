@@ -1,7 +1,8 @@
-import "./jquery.js";
-import "../css/jquery-ui.min.css";
-import "./jquery-ui.min.js";
-import "./jquery.nice-select.min.js";
+import "./jquery/jquery.js";
+import "../css/jquery/jquery-ui.min.css";
+import "./jquery/jquery-ui.min.js";
+import "./jquery/jquery.nice-select.min.js";
+import "./jquery/owl.carousel.min.js";
 
 $(function () {
     // page reload
@@ -46,6 +47,24 @@ $(function () {
         return date;
     }
 
-    // niceselect
+    // nice select
     $("select").niceSelect();
+
+    // owl carousel
+    $(".hero__slider").owlCarousel({
+        loop: true,
+        items: 1,
+        dots: true,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        animateIn: "animate__fadeIn",
+        animateOut: "animate__fadeOut",
+        autoHeight: false,
+    });
+
+    // set background image
+    $(".set-bg-img").each(function () {
+        var url = $(this).data("set-bg");
+        $(this).css("background-image", "url(" + url + ")");
+    });
 });

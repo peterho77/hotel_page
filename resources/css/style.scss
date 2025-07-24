@@ -155,21 +155,43 @@
 
 // hero
 .hero {
-    .booking-form {
-        border: 1px solid red;
-        border-radius: var(--size-200);
-        padding-inline: var(--size-800);
+    min-height: 70vh;
+    min-height: 70dvh;
+    position: relative;
+
+    &__content {
+        position: relative;
+        z-index: 5;
+
+        .booking-form {
+            background-color: var(--neutral-color-100);
+            border-radius: var(--size-200);
+            padding-inline: var(--size-800);
+        }
+    }
+
+    &__text {
+        color: var(--neutral-color-150);
+    }
+
+    &__slider {
+        position: absolute;
+        inset: 0;
     }
 }
 
 // custom jquery nice select ui
 .booking-form {
+    // custom form control bootstrap
+    .form-control{
+        border: 1px solid var(--neutral-color-400);
+    }
+
     .select-option {
         .nice-select {
             padding-inline: var(--size-400);
             padding-block: var(--size-400);
             border-radius: var(--size-100);
-            border: 1px solid #ebebeb;
             outline: none;
             width: 100%;
             float: none;
@@ -199,12 +221,58 @@
                     padding: 0 var(--size-400);
                     color: var(--text-color);
 
-                    &.selected{
+                    &.selected {
                         font-weight: var(--fw-semi-bold);
                     }
                 }
             }
         }
     }
+
+    .submit-btn{
+        display: flex;
+        justify-content: center;
+    }
 }
 
+// hero slider
+.hero__slider {
+    height: 100%;
+
+    &.owl-carousel {
+        .owl-stage-outer {
+            height: 100%;
+
+            .owl-stage {
+                height: 100%;
+
+                .owl-item {
+                    height: 100%;
+
+                    .slider-item {
+                        height: 100%;
+                    }
+                }
+            }
+
+            .owl-dots {
+                position: absolute;
+                inset: auto auto 10px 50%;
+                transform: translateX(-50%);
+                display: flex;
+                gap: var(--size-200);
+
+                .owl-dot {
+                    border: 1px solid red;
+                    border-radius: 50%;
+                    width: var(--size-200);
+                    aspect-ratio: 1;
+
+                    &.active {
+                        background-color: red;
+                    }
+                }
+            }
+        }
+    }
+}
