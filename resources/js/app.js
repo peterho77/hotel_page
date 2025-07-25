@@ -5,9 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/jquery/nice-select.css'
 import '../css/jquery/owl.carousel.min.css'
 import 'animate.css'
-import '../css/base.css';
-import '../css/style.scss';
+import '../css/general/reset.css'
+import '../css/general/base.css'
+import '../css/style.scss'
 
 // js
-import './script.js';
+import './script.js'
 

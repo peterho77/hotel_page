@@ -20,8 +20,13 @@
         {{-- Header --}}
         <x-header/>
 
-        {{-- Hero --}}
-        <x-hero/>
+        {{-- Main content --}}
+        <main>
+            {{ $slot }}
+        </main>
+
+        {{-- Footer --}}
+        <x-footer/>
     </body>
 
 </html>

@@ -1,19 +1,19 @@
-<div class="hero | padding-block-800">
+<section class="hero | align-center justify-center padding-block-800">
     <div class="hero__content">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 align-center">
-                    <div class="hero__text | flow" style="--flow-spacer 0.25em">
-                        <h2 class="fs-primary-heading">Sona A Luxury Hotel</h2>
-                        <p>Here are the best hotel booking sites, including
+                    <div class="hero__text | flow">
+                        <h1 class="fs-primary-heading">Sona A Luxury Hotel</h1>
+                        <p data-width="wide">Here are the best hotel booking sites, including
                             recommendations for international travel and for finding low-priced hotel rooms.</p>
                         <button class="button">Discover now</button>
                     </div>
                 </div>
                 <div class="col-xl-4 offset-xl-2 col-lg-5 offset-lg-1">
-                    <div class="booking-form | padding-block-600">
+                    <div class="booking-form | padding-block-600 flow">
                         <h5 class="fs-normal-heading | text-center">Booking your hotel</h5>
-                        <form action="">
+                        <form  action="">
                             <div class="check-date | mb-3">
                                 <label class="form-label" for="date-in">Check In:</label>
                                 <input class="date-input | form-control" type="text" id="date-in">
@@ -36,8 +36,8 @@
                                     <option value="">2 Room</option>
                                 </select>
                             </div>
-                            <div class="submit-btn | mb-3">
-                                <button class="button">Check Availability</button>
+                            <div class="submit-btn | mt-4">
+                                <button class="button" data-type="inverted">Check Availability</button>
                             </div>
                         </form>
                     </div>
@@ -53,4 +53,4 @@
         <div class="slider-item set-bg-img" data-set-bg="./hotel_img/hero/hero-3.jpg">
         </div>
     </div>
-</div>
+</section>

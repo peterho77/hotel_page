@@ -1,5 +1,5 @@
 <header class="primary-header">
-    <nav class="top-nav | padding-block-200">
+    <section class="top-nav | padding-block-200 section-divider">
         <div class="container">
             <div class="row">
                 <nav class="top-nav__left | col-lg-6">
@@ -24,28 +24,28 @@
                             <li>
                                 <a href="">
                                     <svg class="icon social-icon">
-                                        <use xlink:href="{{asset('img/social-icons.svg#facebook')}}"></use>
+                                        <use xlink:href="{{asset('img/icon/social-icons.svg#facebook')}}"></use>
                                     </svg>
                                 </a>
                             </li>
                             <li>
                                 <a href="">
                                     <svg class="icon social-icon">
-                                        <use xlink:href="{{asset('img/social-icons.svg#instagram')}}"></use>
+                                        <use xlink:href="{{asset('img/icon/social-icons.svg#instagram')}}"></use>
                                     </svg>
                                 </a>
                             </li>
                             <li>
                                 <a href="">
                                     <svg class="icon social-icon">
-                                        <use xlink:href="{{asset('img/social-icons.svg#twitch')}}"></use>
+                                        <use xlink:href="{{asset('img/icon/social-icons.svg#twitch')}}"></use>
                                     </svg>
                                 </a>
                             </li>
                             <li>
                                 <a href="">
                                     <svg class="icon social-icon">
-                                        <use xlink:href="{{asset('img/social-icons.svg#twitter-x')}}"></use>
+                                        <use xlink:href="{{asset('img/icon/social-icons.svg#twitter-x')}}"></use>
                                     </svg>
                                 </a>
                             </li>
@@ -66,8 +66,8 @@
                 </nav>
             </div>
         </div>
-    </nav>
-    <nav class="bottom-nav | padding-block-600">
+    </section>
+    <section class="bottom-nav | padding-block-600">
         <div class="container">
             <div class="row">
                 <div class="logo | col-lg-2">
@@ -88,5 +88,5 @@
                 </nav>
             </div>
         </div>
-    </nav>
+    </section>
 </header>

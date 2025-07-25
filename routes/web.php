@@ -8,5 +8,10 @@ Route::get('/', function () {
 
 Route::redirect('/','/home');
 Route::get('/home', function(){
-    return view('layouts.base');
+    return view('pages.home');
+});
+
+// Admin route
+Route::get('/admin',function(){
+    return view('layouts.admin');
 });
