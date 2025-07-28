@@ -6,13 +6,13 @@
                     <ul class="nav-list" role="list">
                         <li class="padding-block-200">
                             <svg class="icon">
-                                <use xlink:href="{{asset('img/telephone-fill.svg#telephone-fill')}}"></use>
+                                <use xlink:href="{{asset('icon/guest/telephone-fill.svg#telephone-fill')}}"></use>
                             </svg>
                             <span class="fw-semi-bold">037 619 3244</span>
                         </li>
                         <li>
                             <svg class="icon">
-                                <use xlink:href="{{asset('img/envelope-fill.svg#envelope-fill')}}"></use>
+                                <use xlink:href="{{asset('icon/guest/envelope-fill.svg#envelope-fill')}}"></use>
                             </svg>
                             <span class="fw-semi-bold">peterho5477@gmail.com</span>
                         </li>
@@ -24,28 +24,28 @@
                             <li>
                                 <a href="">
                                     <svg class="icon social-icon">
-                                        <use xlink:href="{{asset('img/icon/social-icons.svg#facebook')}}"></use>
+                                        <use xlink:href="{{asset('icon/guest/social-icons.svg#facebook')}}"></use>
                                     </svg>
                                 </a>
                             </li>
                             <li>
                                 <a href="">
                                     <svg class="icon social-icon">
-                                        <use xlink:href="{{asset('img/icon/social-icons.svg#instagram')}}"></use>
+                                        <use xlink:href="{{asset('icon/guest/social-icons.svg#instagram')}}"></use>
                                     </svg>
                                 </a>
                             </li>
                             <li>
                                 <a href="">
                                     <svg class="icon social-icon">
-                                        <use xlink:href="{{asset('img/icon/social-icons.svg#twitch')}}"></use>
+                                        <use xlink:href="{{asset('icon/guest/social-icons.svg#twitch')}}"></use>
                                     </svg>
                                 </a>
                             </li>
                             <li>
                                 <a href="">
                                     <svg class="icon social-icon">
-                                        <use xlink:href="{{asset('img/icon/social-icons.svg#twitter-x')}}"></use>
+                                        <use xlink:href="{{asset('icon/guest/social-icons.svg#twitter-x')}}"></use>
                                     </svg>
                                 </a>
                             </li>
@@ -71,7 +71,7 @@
         <div class="container">
             <div class="row">
                 <div class="header-logo | col-lg-2">
-                    <img src="{{ asset('hotel_img/logo.png') }}" alt="">
+                    <img src="{{ asset('img/logo.png') }}" alt="">
                 </div>
                 <nav class="primary-bottom-nav | col-lg-10">
                     <div class="search-bar">

@@ -46,11 +46,11 @@
         </div>
     </div>
     <div class="hero__slider owl-carousel owl-theme">
-        <div class="slider-item set-bg-img" data-set-bg="./hotel_img/hero/hero-1.jpg">
+        <div class="slider-item set-bg-img" data-set-bg="./img/hero/hero-1.jpg">
         </div>
-        <div class="slider-item set-bg-img" data-set-bg="./hotel_img/hero/hero-2.jpg">
+        <div class="slider-item set-bg-img" data-set-bg="./img/hero/hero-2.jpg">
         </div>
-        <div class="slider-item set-bg-img" data-set-bg="./hotel_img/hero/hero-3.jpg">
+        <div class="slider-item set-bg-img" data-set-bg="./img/hero/hero-3.jpg">
         </div>
     </div>
 </section>

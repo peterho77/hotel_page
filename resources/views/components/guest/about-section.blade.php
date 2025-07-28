@@ -24,10 +24,10 @@
                 <div class="about__img">
                     <div class="row">
                         <div class="col-sm-6">
-                            <img class="mx-auto" src="{{ asset('./hotel_img/about/about-1.jpg') }}" alt="">
+                            <img class="mx-auto" src="{{ asset('./img/about/about-1.jpg') }}" alt="">
                         </div>
                         <div class="col-sm-6">
-                            <img class="mx-auto" src="{{ asset('./hotel_img/about/about-2.jpg') }}" alt="">
+                            <img class="mx-auto" src="{{ asset('./img/about/about-2.jpg') }}" alt="">
                         </div>
                     </div>
                 </div>

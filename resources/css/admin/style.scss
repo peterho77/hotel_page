@@ -1,0 +1,90 @@
+// header
+.primary-header{
+    .top-nav{
+        .nav-wrapper{
+            justify-content: flex-end;
+    
+            li,a{
+                gap: var(--size-100);
+            }
+
+            .financial-tools{
+                gap: var(--size-800);
+
+                li:last-child{
+                    position: relative;
+
+                    &::before{
+                        content: "";
+                        position:absolute;
+                        width: 1px;
+                        height: 100%;
+                        background-color: var(--neutral-color-400);
+                        left:-1rem;
+                        top:0;
+                    }
+                }
+            }
+
+            .setting-options{
+                gap: var(--size-700);
+
+                .icon{
+                    fill: var(--neutral-color-500);
+                }
+
+                .branch{
+                    position: relative;
+                    background-color: var(--neutral-color-300);
+                    padding: .25em .75em;
+                    border-radius: var(--size-200);
+
+                    &::before{
+                        content: "";
+                        position:absolute;
+                        width: 1px;
+                        height: 80%;
+                        background-color: var(--neutral-color-400);
+                        top:2px;
+                        left:-1rem;
+                    }
+
+                    &::after{
+                        content: "";
+                        position:absolute;
+                        width: 1px;
+                        height: 80%;
+                        background-color: var(--neutral-color-400);
+                        top: 2px;
+                        right:-1rem;
+                    }
+                }
+            }
+        }
+    }
+
+    .bottom-nav{
+        background-color: var(--primary-color-500);
+        color: var(--neutral-color-100);
+        font-weight: var(--fw-semi-bold);
+
+        .primary-nav{
+            gap: var(--size-200);
+
+            li{
+                border-radius: var(--size-200);
+                padding: 1em .75em;
+                cursor: pointer;
+                transition: 200ms ease;
+
+                &:hover{
+                    background-color: var(--primary-color-700);
+                }
+            }
+        }
+
+        button{
+            gap: var(--size-200);
+        }
+    }
+}

@@ -1,14 +1,14 @@
 <x-base-layout>
     {{-- Hero section --}}
-    <x-hero-section />
+    <x-guest.hero-section />
 
     {{-- About section--}}
-    <x-about-section />
+    <x-guest.about-section />
 
     {{-- Services section--}}
-    <x-services-section/>
+    <x-guest.services-section/>
 
     {{-- Room section --}}
-    <x-room-section/>
+    <x-guest.room-section/>
     
 </x-base-layout>

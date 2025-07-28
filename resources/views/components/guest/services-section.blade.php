@@ -8,7 +8,7 @@
             <div class="col-lg-4 col-sm-6">
                 <div class="service-item | text-center flow" style="--flow-spacer:1rem">
                     <svg class="icon service-icon">
-                        <use xlink:href="{{ asset('./img/icon/services-icons.svg#travel-plan') }}"></use>
+                        <use xlink:href="{{ asset('./icon/guest/services-icons.svg#travel-plan') }}"></use>
                     </svg>
                     <h5 class="service-item__title fs-normal-heading">Travel Plan</h5>
                     <p>
@@ -20,7 +20,7 @@
             <div class="col-lg-4 col-sm-6">
                 <div class="service-item | text-center flow" style="--flow-spacer:1rem">
                     <svg class="icon service-icon">
-                        <use xlink:href="{{ asset('./img/icon/services-icons.svg#catering') }}"></use>
+                        <use xlink:href="{{ asset('./icon/guest/services-icons.svg#catering') }}"></use>
                     </svg>
                     <h5 class="service-item__title fs-normal-heading">Catering Service</h5>
                     <p>
@@ -32,7 +32,7 @@
             <div class="col-lg-4 col-sm-6">
                 <div class="service-item | text-center flow" style="--flow-spacer:1rem">
                     <svg class="icon service-icon">
-                        <use xlink:href="{{ asset('./img/icon/services-icons.svg#babysitting') }}"></use>
+                        <use xlink:href="{{ asset('./icon/guest/services-icons.svg#babysitting') }}"></use>
                     </svg>
                     <h5 class="service-item__title fs-normal-heading">Babysitting</h5>
                     <p>
@@ -44,7 +44,7 @@
             <div class="col-lg-4 col-sm-6">
                 <div class="service-item | text-center flow" style="--flow-spacer:1rem">
                     <svg class="icon service-icon">
-                        <use xlink:href="{{ asset('./img/icon/services-icons.svg#laundry') }}"></use>
+                        <use xlink:href="{{ asset('./icon/guest/services-icons.svg#laundry') }}"></use>
                     </svg>
                     <h5 class="service-item__title fs-normal-heading">Laundry</h5>
                     <p>
@@ -56,7 +56,7 @@
             <div class="col-lg-4 col-sm-6">
                 <div class="service-item | text-center flow" style="--flow-spacer:1rem">
                     <svg class="icon service-icon">
-                        <use xlink:href="{{ asset('./img/icon/services-icons.svg#driver') }}"></use>
+                        <use xlink:href="{{ asset('./icon/guest/services-icons.svg#driver') }}"></use>
                     </svg>
                     <h5 class="service-item__title fs-normal-heading">Hire Driver</h5>
                     <p>
@@ -68,7 +68,7 @@
             <div class="col-lg-4 col-sm-6">
                 <div class="service-item | text-center flow" style="--flow-spacer:1rem">
                     <svg class="icon service-icon">
-                        <use xlink:href="{{ asset('./img/icon/services-icons.svg#bar-drink') }}"></use>
+                        <use xlink:href="{{ asset('./icon/guest/services-icons.svg#bar-drink') }}"></use>
                     </svg>
                     <h5 class="service-item__title fs-normal-heading">Bar & Drink</h5>
                     <p>

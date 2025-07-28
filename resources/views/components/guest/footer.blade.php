@@ -3,34 +3,34 @@
         <div class="container">
             <div class="row row-gap-4">
                 <div class="footer-content__about | col-lg-4 flow text-center-only-md" style="--flow-spacer:1em">
-                    <img class="footer-logo" src="{{ asset('./hotel_img/footer-logo.png') }}" alt="">
+                    <img class="footer-logo" src="{{ asset('./img/footer-logo.png') }}" alt="">
                     <p data-width="narrow">We inspire and reach millions of travelers across 90 local websites</p>
                     <ul class="social-list | justify-center-only-md" data-type="inverted" data-size="big">
                         <li>
                             <a href="">
                                 <svg class="icon social-icon">
-                                    <use xlink:href="{{asset('img/icon/social-icons.svg#facebook')}}"></use>
+                                    <use xlink:href="{{asset('icon/guest/social-icons.svg#facebook')}}"></use>
                                 </svg>
                             </a>
                         </li>
                         <li>
                             <a href="">
                                 <svg class="icon social-icon">
-                                    <use xlink:href="{{asset('img/icon/social-icons.svg#instagram')}}"></use>
+                                    <use xlink:href="{{asset('icon/guest/social-icons.svg#instagram')}}"></use>
                                 </svg>
                             </a>
                         </li>
                         <li>
                             <a href="">
                                 <svg class="icon social-icon">
-                                    <use xlink:href="{{asset('img/icon/social-icons.svg#twitch')}}"></use>
+                                    <use xlink:href="{{asset('icon/guest/social-icons.svg#twitch')}}"></use>
                                 </svg>
                             </a>
                         </li>
                         <li>
                             <a href="">
                                 <svg class="icon social-icon">
-                                    <use xlink:href="{{asset('img/icon/social-icons.svg#twitter-x')}}"></use>
+                                    <use xlink:href="{{asset('icon/guest/social-icons.svg#twitter-x')}}"></use>
                                 </svg>
                             </a>
                         </li>
@@ -53,7 +53,7 @@
                         <input type="text" placeholded="Email">
                         <button class="button send-button">
                             <svg class="icon">
-                                <use xlink:href="{{asset('img/icon/send-letter.svg#send-letter')}}"></use>
+                                <use xlink:href="{{asset('icon/guest/send-letter.svg#send-letter')}}"></use>
                             </svg></button>
                     </form>
                 </div>

@@ -18,7 +18,7 @@
         </div>
 
         {{-- Header --}}
-        <x-header/>
+        <x-guest.header/>
 
         {{-- Main content --}}
         <main>
@@ -26,7 +26,7 @@
         </main>
 
         {{-- Footer --}}
-        <x-footer/>
+        <x-guest.footer/>
     </body>
 
 </html>

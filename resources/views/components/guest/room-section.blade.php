@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-3 col-md-6">
-                <div class="room-item | set-bg-img" data-set-bg="./hotel_img/room/room-b1.jpg">
+                <div class="room-item | set-bg-img" data-set-bg="./img/room/room-b1.jpg">
                     <div class="room-item__content | padding-block-400 flow" style="--flow-spacer:1em">
                         <h3 class="room-item__title | text-center fs-normal-heading">Double Room</h3>
                         <h2 class="room-item__price | text-center">
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
-                <div class="room-item | set-bg-img" data-set-bg="./hotel_img/room/room-b2.jpg">
+                <div class="room-item | set-bg-img" data-set-bg="./img/room/room-b2.jpg">
                     <div class="room-item__content | padding-block-400 flow" style="--flow-spacer:1em">
                         <h3 class="room-item__title | text-center fs-normal-heading">Premium Room</h3>
                         <h2 class="room-item__price | text-center">
@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
-                <div class="room-item | set-bg-img" data-set-bg="./hotel_img/room/room-b3.jpg">
+                <div class="room-item | set-bg-img" data-set-bg="./img/room/room-b3.jpg">
                     <div class="room-item__content | padding-block-400 flow" style="--flow-spacer:1em">
                         <h3 class="room-item__title | text-center fs-normal-heading">Deluxe Room</h3>
                         <h2 class="room-item__price | text-center">
@@ -95,7 +95,7 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
-                <div class="room-item | set-bg-img" data-set-bg="./hotel_img/room/room-b4.jpg">
+                <div class="room-item | set-bg-img" data-set-bg="./img/room/room-b4.jpg">
                     <div class="room-item__content | padding-block-400 flow" style="--flow-spacer:1em">
                         <h3 class="room-item__title | text-center fs-normal-heading">Family Room</h3>
                         <h2 class="room-item__price | text-center">
