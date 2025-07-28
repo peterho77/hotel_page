@@ -1,7 +1,7 @@
 <section class="hero | align-center justify-center padding-block-800">
     <div class="hero__content">
         <div class="container">
-            <div class="row">
+            <div class="row row-gap-4">
                 <div class="col-lg-6 align-center">
                     <div class="hero__text | flow">
                         <h1 class="fs-primary-heading">Sona A Luxury Hotel</h1>

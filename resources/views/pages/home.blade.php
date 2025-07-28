@@ -7,5 +7,8 @@
 
     {{-- Services section--}}
     <x-services-section/>
+
+    {{-- Room section --}}
+    <x-room-section/>
     
 </x-base-layout>

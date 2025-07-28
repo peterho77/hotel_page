@@ -98,8 +98,19 @@ p {
     max-width: 50ch;
 }
 
+p[data-width="narrow"]{
+    max-width: 30ch;
+}
+
 p[data-width="wide"]{
     max-width: 64ch;
+}
+
+@media (max-width: 62em)
+{
+    p{
+        max-width: 100%;
+    }
 }
 
 nav {
@@ -109,6 +120,10 @@ nav {
 img {
     display: block;
     max-width: 100%;
+}
+
+input{
+    border: none;
 }
 
 input:focus,
@@ -145,6 +160,13 @@ a {
 
 .text-center {
     text-align: center;
+}
+
+@media (max-width: 62em)
+{
+    .text-center-only-md{
+        text-align:center;
+    }
 }
 
 .padding-block-1000 {
@@ -184,6 +206,12 @@ a {
     display: flex;
     justify-content: center;
 }
+@media (max-width: 62em)
+{
+    .justify-center-only-md{
+        justify-content: center;
+    }
+}
 
 /* flow spacer */
 .flow > :not(:first-child) {
@@ -218,6 +246,8 @@ a {
 /* button */
 .button {
     display: inline-flex;
+    align-items: center;
+    justify-content: center;
     border: none;
     border-radius: 100vmax;
     background-color: var(--accent-color-400);
@@ -269,6 +299,23 @@ a {
     display: flex;
     gap: var(--size-400);
 }
+.social-list[data-size="big"]{
+    gap: var(--size-600);
+}
+.social-list[data-size="big"] .social-icon
+{
+    width: var(--size-600);
+    height: var(--size-600);
+}
+.social-list[data-type="inverted"] .social-icon{
+    color: var(--neutral-color-150);
+}
+
+.policy-list {
+    display: flex;
+    gap: var(--size-800);
+}
+
 
 /* set background image */
 .set-bg-img {

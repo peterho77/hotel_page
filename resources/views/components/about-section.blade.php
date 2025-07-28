@@ -1,6 +1,6 @@
 <section class="about | padding-block-1000 section-divider">
     <div class="container">
-        <div class="row">
+        <div class="row row-gap-4">
             <div class="col-lg-6 | align-center justify-center">
                 <div class="about__content | text-center flow" style="--flow-spacer:1rem">
                     <span class="label">About us</span>
@@ -24,10 +24,10 @@
                 <div class="about__img">
                     <div class="row">
                         <div class="col-sm-6">
-                            <img src="{{ asset('./hotel_img/about/about-1.jpg') }}" alt="">
+                            <img class="mx-auto" src="{{ asset('./hotel_img/about/about-1.jpg') }}" alt="">
                         </div>
                         <div class="col-sm-6">
-                            <img src="{{ asset('./hotel_img/about/about-2.jpg') }}" alt="">
+                            <img class="mx-auto" src="{{ asset('./hotel_img/about/about-2.jpg') }}" alt="">
                         </div>
                     </div>
                 </div>

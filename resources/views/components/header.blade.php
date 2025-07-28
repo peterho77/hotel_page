@@ -70,7 +70,7 @@
     <section class="bottom-nav | padding-block-600">
         <div class="container">
             <div class="row">
-                <div class="logo | col-lg-2">
+                <div class="header-logo | col-lg-2">
                     <img src="{{ asset('hotel_img/logo.png') }}" alt="">
                 </div>
                 <nav class="primary-bottom-nav | col-lg-10">
