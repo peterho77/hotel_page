@@ -8,10 +8,11 @@ Route::get('/', function () {
 
 Route::redirect('/','/home');
 Route::get('/home', function(){
-    return view('pages.home');
+    return view('pages.guest.home');
 });
 
 // Admin route
-Route::get('/admin',function(){
-    return view('layouts.admin');
+
+Route::get('/admin/room',function(){
+    return view('pages.admin.room.room');
 });

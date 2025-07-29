@@ -71,7 +71,7 @@
         .primary-nav{
             gap: var(--size-200);
 
-            li{
+            > li{
                 border-radius: var(--size-200);
                 padding: 1em .75em;
                 cursor: pointer;
@@ -81,10 +81,77 @@
                     background-color: var(--primary-color-700);
                 }
             }
+
+            .room-nav{
+                position: relative;
+
+                .sub-menu{
+                    opacity:0;
+                    transition: opacity 300ms ease;
+                    z-index: 999;
+                    position: absolute;
+                    display: flex;
+                    flex-direction: column;
+                    min-width: fit-content;
+                    width: 250px;
+                    top: calc(100% + 4px);
+                    left:0;
+                    background-color: var(--neutral-color-100);
+                    border-radius: var(--size-200);
+                    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+                    li{
+                        padding: 1em;
+
+                        &:hover{
+                            background-color: var(--neutral-color-300);
+                        }
+                    }
+                }
+
+                &:hover{
+                    .sub-menu{
+                        opacity: 1;
+                    }
+                }
+            }
         }
 
         button{
             gap: var(--size-200);
+        }
+    }
+}
+
+// main content
+.main-content{
+    
+    &__left{
+        width: 250px;
+
+        .side-bar{
+            .room-search{
+                input{
+                    padding: .75em;
+                    border-radius: var(--size-200);
+                    border:1px solid var(--neutral-color-300);
+                    font-size: var(--fs-400);
+
+                    &:focus{
+                        border-color: var(--primary-color-500);
+                    }
+                }
+            }
+
+            .add-branch-list{
+                .multi-select-tag{
+                    margin-top: 1em;
+
+                    #selected-tags{
+                        padding: .5em;
+                    }
+                }
+            }
         }
     }
 }

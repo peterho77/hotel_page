@@ -84,7 +84,13 @@
             <nav class="nav-wrapper">
                 <ul class="primary-nav | nav-list">
                     <li>Tổng quan</li>
-                    <li>Phòng</li>
+                    <li class="room-nav">
+                        Phòng
+                        <ul class="sub-menu | padding-block-200">
+                            <li><a href="">Hạng phòng & Phòng</a></li>
+                            <li><a href="">Thiết lập giá</a></li>
+                        </ul>
+                    </li>
                     <li>Hàng hóa</li>
                     <li>Giao dịch</li>
                     <li>Đối tác</li>

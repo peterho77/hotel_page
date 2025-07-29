@@ -43,11 +43,12 @@
 
     --neutral-color-100: hsl(0, 0%, 100%);
     --neutral-color-150: hsl(186, 100%, 96%);
-    --neutral-color-300: hsl(150, 5%, 78%);
+    --neutral-color-200: hsl(210, 14%, 97%);
+    --neutral-color-300: hsl(180, 1%, 87%);
     --neutral-color-400: hsl(144, 3%, 64%);
     --neutral-color-700: hsl(225, 23%, 17%);
     --neutral-color-800: hsl(224, 24%, 15%);
-    --neutral-color-900: hsl(240, 2%, 10%);
+    --neutral-color-900: hsl(240, 2%, 10%); 
 
     --text-color: hsl(295, 6%, 37%);
 
@@ -128,10 +129,6 @@ nav {
 img {
     display: block;
     max-width: 100%;
-}
-
-input{
-    border: none;
 }
 
 input:focus,
@@ -321,4 +318,52 @@ a,span {
 .set-bg-img {
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+/* Admin */
+/* main content */
+.main-content{
+    min-height: 100vh;
+    min-height: 100dvh;
+    background-color: var(--neutral-color-200);
+}
+
+/* side bar */
+.side-bar{
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-200);
+}
+
+/* box */
+.box{
+    border-radius: var(--size-200);
+    background-color: var(--neutral-color-100);
+    padding: 1em;
+}
+
+/* record quantity */
+.record-quantity{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 1em;
+}
+.record-quantity .nice-select{
+    border: none;
+    background: transparent;
+    font-size: var(--fs-300);
+}
+.record-quantity .nice-select:focus{
+    background: var(--neutral-color-300);
+}
+
+/* radio select */
+.radio-select{
+    display: inline-flex;
+    gap: var(--size-200);
+    align-items: center;
+}
+.radio-select > input{
+    align-self: stretch;
 }

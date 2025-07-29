@@ -48,7 +48,7 @@ $(function () {
     }
 
     // nice select
-    $("select").niceSelect();
+    $(".nice-select").niceSelect();
 
     // owl carousel
     $(".hero__slider").owlCarousel({

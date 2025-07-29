@@ -24,14 +24,14 @@
                             </div>
                             <div class="select-option | mb-3">
                                 <label class="form-label" for="guest">Guest: </label>
-                                <select name="guest" id="guest" class="form-control">
+                                <select name="guest" id="guest" class="nice-select form-control">
                                     <option value="">2 Adults</option>
                                     <option value="">3 Adults</option>
                                 </select>
                             </div>
                             <div class="select-option | mb-3">
                                 <label class="form-label" for="room">Room: </label>
-                                <select name="room" id="room" class="form-control">
+                                <select name="room" id="room" class="nice-select form-control">
                                     <option value="">1 Room</option>
                                     <option value="">2 Room</option>
                                 </select>

@@ -7,6 +7,8 @@
         <title>Admin</title>
         @vite(['resources/js/admin.js'])
 
+        {{-- Fix FOUC --}}
+        <style>html{visibility: hidden;opacity:0;}</style>
     </head>
 
     <body>
@@ -17,6 +19,9 @@
 
         {{-- Header --}}
         <x-admin.header />
+
+        {{-- Main --}}
+        {{ $slot }}
     </body>
 
 </html>
