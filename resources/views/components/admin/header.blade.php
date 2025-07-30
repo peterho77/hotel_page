@@ -1,6 +1,6 @@
 <header class="primary-header">
     <section class="top-nav | padding-block-200">
-        <div class="container">
+        <div class="custom-container">
             <div class="row">
                 <div class="header-logo | col-lg-2">
                     <img src="{{ asset('img/logo.png') }}" alt="">
@@ -80,7 +80,7 @@
         </div>
     </section>
     <section class="bottom-nav | padding-block-100">
-        <div class="container">
+        <div class="custom-container">
             <nav class="nav-wrapper">
                 <ul class="primary-nav | nav-list">
                     <li>Tổng quan</li>

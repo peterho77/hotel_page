@@ -87,6 +87,7 @@
 
                 .sub-menu{
                     opacity:0;
+                    visibility: hidden;
                     transition: opacity 300ms ease;
                     z-index: 999;
                     position: absolute;
@@ -112,20 +113,19 @@
                 &:hover{
                     .sub-menu{
                         opacity: 1;
+                        visibility: visible;
                     }
                 }
             }
-        }
-
-        button{
-            gap: var(--size-200);
         }
     }
 }
 
 // main content
 .main-content{
-    
+    display: flex;
+    gap: var(--size-400);
+
     &__left{
         width: 250px;
 
@@ -152,6 +152,14 @@
                     }
                 }
             }
+        }
+    }
+
+    &__right{
+        flex: 1;
+
+        .filter-options{
+            
         }
     }
 }

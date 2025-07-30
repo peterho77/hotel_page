@@ -13,7 +13,7 @@
 
     <body>
         {{-- Page reload --}}
-        <div id="pre-loader">
+        <div class="pre-loader">
             <div class="loader"></div>
         </div>
 

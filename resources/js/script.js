@@ -8,7 +8,7 @@ $(function () {
     // page reload
     $(window).on("load", function () {
         $(".loader").fadeOut();
-        $("#pre-loader").delay(200).fadeOut("slow");
+        $(".pre-loader").delay(300).fadeOut("slow");
     });
 
     // date picker check in , check out

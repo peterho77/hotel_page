@@ -58,7 +58,7 @@
                             <div class="switch">
                                 <span>VN </span>
                                 <svg class="icon">
-                                    <use xlink:href="{{asset('img/caret-down-fill.svg#caret-down-fill')}}"></use>
+                                    <use xlink:href="{{asset('icon/guest/caret-down-fill.svg#caret-down-fill')}}"></use>
                                 </svg>
                             </div>
                         </div>
