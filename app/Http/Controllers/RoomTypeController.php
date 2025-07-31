@@ -14,7 +14,7 @@ class RoomTypeController extends Controller
     {
         //
         $room_type_list = RoomType::all();
-        return view('pages.admin.room.room', ["room_type_list" => $room_type_list]);
+        return view('pages.admin.room_type', ["room_type_list" => $room_type_list]);
     }
 
     /**

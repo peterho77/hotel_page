@@ -1,18 +1,25 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\RoomTypeController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::redirect('/','/home');
-Route::get('/home', function(){
+
+Route::redirect('/', '/home');
+Route::get('/home', function () {
     return view('pages.guest.home');
 });
 
-// Admin route
+// Admin route chưa có auth middleware
 
-Route::get('/admin/room',function(){
-    return view('pages.admin.room.room');
+Route::prefix('admin')->group(function () {
+    Route::singleton('', AdminController::class);
+    Route::apiResource('room_type', RoomTypeController::class);
 });
+
+
+

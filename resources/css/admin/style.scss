@@ -158,8 +158,10 @@
     &__right{
         flex: 1;
 
-        .filter-options{
-            
+        .tab-content{
+            padding: 1em;
+            background: var(--neutral-color-100);
+            border-radius: var(--size-200);
         }
     }
 }
