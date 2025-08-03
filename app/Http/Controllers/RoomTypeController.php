@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RoomType;
+use App\Model\Branch;
 
 class RoomTypeController extends Controller
 {
@@ -14,6 +15,7 @@ class RoomTypeController extends Controller
     {
         //
         $room_type_list = RoomType::all();
+        
         return view('pages.admin.room_type', ["room_type_list" => $room_type_list]);
     }
 

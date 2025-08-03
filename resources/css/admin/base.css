@@ -38,13 +38,15 @@
     --accent-color-500: hsl(32, 100%, 50%);
     --accent-color-600: hsl(30, 63%, 50%);
 
+    --primary-color-300: hsl(212, 63%, 81%);
     --primary-color-500: hsl(212, 100%, 48%);
     --primary-color-700: hsl(212, 100%, 38%);
 
     --success-color-500: hsl(140, 100%, 36%);
     --success-color-700: hsl(140, 84%, 31%);
 
-    --danger-color: hsl(0, 100%, 50%);
+    --danger-color-500: hsl(0, 100%, 50%);
+    --danger-color-700: hsl(0, 76%, 44%);
 
     --neutral-color-100: hsl(0, 0%, 100%);
     --neutral-color-150: hsl(186, 100%, 96%);
@@ -106,6 +108,10 @@ h3,
 h4,
 h5 {
     line-height: 1.2;
+}
+
+table {
+    width: 100%;
 }
 
 p {
@@ -229,7 +235,7 @@ span {
 /* custom container replace bootstrap container*/
 .custom-container {
     --padding-container: 1rem;
-    --max-width: 1400px;
+    --max-width: 1500px;
     width: min(var(--max-width), 100% - 2 * var(--padding-container));
     margin-inline: auto;
 }
@@ -313,6 +319,10 @@ span {
     width: var(--size-400);
 }
 
+.detail-icon {
+    fill: var(--success-color-500);
+}
+
 /* button */
 .button {
     display: inline-flex;
@@ -336,14 +346,6 @@ span {
     background-color: var(--neutral-color-100);
 }
 
-.success-button {
-    background-color: var(--success-color-500);
-
-    .icon {
-        fill: var(--neutral-color-100);
-    }
-}
-
 .button:hover,
 .button:focus-visible {
     background-color: var(--accent-color-300);
@@ -354,16 +356,48 @@ span {
     background-color: var(--neutral-color-150);
 }
 
-/* add new button, add new list*/
+/* success button */
+.success-button {
+    background-color: var(--success-color-500);
+
+    span {
+        color: var(--neutral-color-100);
+    }
+
+    .icon {
+        fill: var(--neutral-color-100);
+    }
+}
+.success-button:hover {
+    background-color: var(--success-color-700);
+}
+
+/* danger button */
+.danger-button {
+    background-color: var(--danger-color-500);
+
+    span {
+        color: var(--neutral-color-100);
+    }
+
+    .icon {
+        fill: var(--neutral-color-100);
+    }
+}
+.danger-button:hover {
+    background-color: var(--danger-color-700);
+}
+
+/* add new button */
 .add-new-button {
     position: relative;
 }
 .add-new-button:hover .add-new-list {
+    /* show element */
     opacity: 1;
     visibility: visible;
 }
-
-.add-new-list {
+.add-new-button .add-new-list {
     z-index: 999;
     background: var(--neutral-color-100);
     padding-block: 0.75em;
@@ -376,6 +410,7 @@ span {
     top: 100%;
     left: 0;
 
+    /* hide element */
     opacity: 0;
     visibility: hidden;
     transition: 300ms ease;
@@ -395,9 +430,56 @@ span {
     }
 }
 
-/* success button */
-.success-button:hover {
-    background-color: var(--success-color-700);
+/* toggle columns button */
+.toggle-columns-button {
+    position: relative;
+}
+.toggle-columns-button .toggle-columns-list {
+    z-index: 999;
+    background: var(--neutral-color-100);
+    padding: 0.75em;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: var(--size-200);
+    color: var(--neutral-color-700);
+    font-weight: var(--fw-regular);
+    position: absolute;
+    top: 100%;
+    right: 0;
+
+    column-count: 2;
+    column-gap: var(--size-600);
+    max-height: 200px;
+    width: fit-content;
+
+    /* hide element */
+    opacity: 0;
+    visibility: hidden;
+    transition: 300ms ease;
+
+    > li {
+        line-height: 2.4;
+        display: grid;
+        grid-template-columns: min-content 1fr;
+        align-items: center;
+
+        .form-check-label {
+            text-wrap: nowrap;
+            text-align: left;
+        }
+    }
+}
+.toggle-columns-button .toggle-columns-list.show {
+    /* show element */
+    opacity: 1;
+    visibility: visible;
+}
+
+/* update button */
+.update-buttons {
+    padding: var(--size-200);
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--size-200);
 }
 
 /* divider section */
@@ -510,12 +592,72 @@ span {
 
 /* table detail infor list */
 .detail-infor-list {
+    padding: var(--size-200);
+}
+.detail-infor-list .detail-content {
     width: 100%;
     background: var(--neutral-color-100);
-    max-height: 500px;
+    max-height: 600px;
     column-count: 2;
     column-gap: var(--size-200);
 }
 .detail-infor-list .detail-item {
     padding: 1em;
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+.detail-infor-list .detail-item span:first-child {
+    width: 120px;
+}
+.detail-infor-list .detail-item span:last-child {
+    flex: 1;
+}
+
+/* ẩn icon mặc định của data control trong data table */
+td.dt-control::before {
+    display: none !important;
+}
+td.dt-control .icon {
+    text-align: center;
+    margin-block: auto;
+}
+
+/* custom datatable */
+table.dataTable > thead {
+    background: var(--primary-color-300);
+}
+
+@media (max-width: 62em) {
+    table.dataTable thead,
+    table.dataTable td.dt-control {
+        display: none;
+    }
+
+    table.dataTable tr {
+        display: block;
+        padding: 1em;
+    }
+
+    td {
+        display: grid;
+        grid-template-columns: 15ch 1fr;
+        text-wrap: nowrap;
+    }
+
+    table.dataTable.row-border > tbody > tr > * {
+        border-top: none;
+    }
+    div.dt-container.dt-empty-footer tbody > tr:last-child > * {
+        border-bottom: none;
+    }
+
+    table.dataTable td.dt-type-numeric {
+        text-align: left;
+    }
+
+    table.dataTable td::before {
+        content: attr(data-cell) ": ";
+        text-transform: capitalize;
+        font-weight: var(--fw-bold);
+    }
 }

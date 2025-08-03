@@ -1,5 +1,5 @@
 <x-admin-layout>
-    <main class="room-section | padding-block-600">
+    <main class="room-type-section | padding-block-600">
         <div class="custom-container">
             <div class="main-content">
                 <section class="main-content__left">
@@ -70,12 +70,14 @@
                                         </use>
                                     </svg>
                                     <ul class="add-new-list">
-                                        <li>
-                                            <svg class="icon" data-size="small">
-                                                <use xlink:href="{{asset('icon/admin/filter-buttons.svg#plus')}}">
-                                                </use>
-                                            </svg>
-                                            Hạng phòng
+                                        <li >
+                                            <a href="" data-bs-toggle="modal" data-bs-target="#add-new-room-type">
+                                                <svg class="icon" data-size="small">
+                                                    <use xlink:href="{{asset('icon/admin/filter-buttons.svg#plus')}}">
+                                                    </use>
+                                                </svg>
+                                                Hạng phòng
+                                            </a>
                                         </li>
                                         <li>
                                             <svg class="icon" data-size="small">
@@ -86,19 +88,103 @@
                                         </li>
                                     </ul>
                                 </button>
-                                <button class="button success-button">
-                                    <svg class="icon">
-                                        <use xlink:href="{{asset('icon/admin/filter-buttons.svg#list')}}">
-                                        </use>
-                                    </svg>
-                                    <svg class="icon" data-size="small">
-                                        <use xlink:href="{{asset('icon/guest/caret-down-fill.svg#caret-down-fill')}}">
-                                        </use>
-                                    </svg>
+                                {{-- modal add new room type --}}
+                                <div class="modal fade" id="add-new-room-type" tabindex="-1" aria-labelledby="add_new-room-type" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm hạng phòng mới</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                ...
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="button success-button toggle-columns-button">
+                                    <div>
+                                        <svg class="icon">
+                                            <use xlink:href="{{asset('icon/admin/filter-buttons.svg#list')}}">
+                                            </use>
+                                        </svg>
+                                        <svg class="icon" data-size="small">
+                                            <use
+                                                xlink:href="{{asset('icon/guest/caret-down-fill.svg#caret-down-fill')}}">
+                                            </use>
+                                        </svg>
+                                    </div>
+                                    <ul class="toggle-columns-list">
+                                        <li class="toggle-item toggle-vis | form-check">
+                                            <input class="form-check-input" type="checkbox" name="name" data-column="1"
+                                                id="name" checked>
+                                            <label class="form-check-label" for="name">
+                                                Tên hạng phòng
+                                            </label>
+                                        </li>
+                                        <li class="toggle-item toggle-vis | form-check">
+                                            <input class="form-check-input" type="checkbox" name="quantity"
+                                                data-column="3" id="quantity" checked>
+                                            <label class="form-check-label" for="quantity">
+                                                Số lượng phòng
+                                            </label>
+                                        </li>
+                                        <li class="toggle-item toggle-vis | form-check">
+                                            <input class="form-check-input" type="checkbox" name="hourly_rate"
+                                                data-column="4" id="hourly_rate" checked>
+                                            <label class="form-check-label" for="hourly_rate">
+                                                Giá giờ
+                                            </label>
+
+                                        </li>
+                                        <li class="toggle-item toggle-vis | form-check">
+                                            <input class="form-check-input" type="checkbox" name="full_day_rate"
+                                                data-column="5" id="full_day_rate" checked>
+                                            <label class="form-check-label" for="full_day_rate">
+                                                Giá cả ngày
+                                            </label>
+                                        </li>
+                                        <li class="toggle-item toggle-vis | form-check">
+                                            <input class="form-check-input" type="checkbox" name="overnight_rate"
+                                                data-column="6" id="overnight_rate" checked>
+                                            <label class="form-check-label" for="overnight_rate">
+                                                Giá qua đêm
+                                            </label>
+                                        </li>
+                                        <li class="toggle-item toggle-vis | form-check">
+                                            <input class="form-check-input" type="checkbox" name="status"
+                                                data-column="7" id="status" checked>
+                                            <label class="form-check-label" for="status">
+                                                Trạng thái
+                                            </label>
+                                        </li>
+                                        <li class="toggle-item toggle-vis | form-check">
+                                            <input class="form-check-input" type="checkbox" name="branch"
+                                                data-column="8" id="branch" checked>
+                                            <label class="form-check-label" for="branch">
+                                                Chi nhánh
+                                            </label>
+                                        </li>
+                                        <li class="toggle-item toggle-vis | form-check">
+                                            <input class="form-check-input" type="checkbox" name="img" data-column=""
+                                                id="img" checked>
+                                            <label class="form-check-label" for="img">
+                                                Hình ảnh
+                                            </label>
+                                        </li>
+                                    </ul>
                                 </button>
                             </div>
                         </div>
                     </nav>
+
+                    {{-- nav tab bootstrap --}}
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab">
                             <button class="nav-link active" id="nav-room-type-tab" data-bs-toggle="tab"
@@ -125,6 +211,8 @@
                                         <th>Quantity</th>
                                         <th>Hourly Rate</th>
                                         <th>Full Day Rate</th>
+                                        <th>Overnight Rate</th>
+                                        <th>Status</th>
                                         <th>Branch</th>
                                     </tr>
                                 </thead>
@@ -132,14 +220,16 @@
                                     @foreach ($room_type_list as $room_type)
                                         <tr>
                                             <td></td>
-                                            <td>{{$room_type->name}}</td>
-                                            <td>{{$room_type->description}}</td>
-                                            <td>{{$room_type->quantity}}</td>
-                                            <td>{{$room_type->hourly_rate}}</td>
-                                            <td>{{$room_type->full_day_rate}}</td>
-                                            <td>{{$room_type->branch_id}}</td>
+                                            <td data-cell="name">{{$room_type->name}}</td>
+                                            <td data-cell="desciption">{{$room_type->description}}</td>
+                                            <td data-cell="quantity">{{$room_type->quantity}}</td>
+                                            <td data-cell="hourly_rate">{{$room_type->hourly_rate}}</td>
+                                            <td data-cell="full_day_rate">{{$room_type->full_day_rate}}</td>
+                                            <td data-cell="overnight_rate">{{$room_type->overnight_rate}}</td>
+                                            <td data-cell="statud">{{$room_type->status}}</td>
+                                            <td data-cell="branch">{{$room_type->branch->name}}</td>
                                         </tr>
-                                    @endforeach                                        
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
