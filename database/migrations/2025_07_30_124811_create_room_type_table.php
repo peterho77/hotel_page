@@ -19,8 +19,7 @@ return new class extends Migration
             $table->float('hourly_rate');
             $table->float('full_day_rate');
             $table->float('overnight_rate');
-            $table->string('status',50);
-            $table->foreignId('branch_id')->constrained('branch');
+            $table->string('status', 50);
         });
     }
 

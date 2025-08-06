@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             BranchSeeder::class,
-            RoomTypeSeeder::class
+            RoomTypeSeeder::class,
+            RoomTypeBranchSeeder::class
         ]);
     }
 }

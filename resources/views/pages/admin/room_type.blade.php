@@ -10,11 +10,23 @@
                         </div>
                         <div class="box add-branch-list | flow" style="--flow-spacer:1em">
                             <label class="label" for="branches">Chi nhánh</label>
-                            <select name="branches[]" id="branches" multiple>
-                                <option value="0" selected>Chi nhánh trung tâm</option>
-                                <option value="1">Chi nhánh 1</option>
-                                <option value="2">Chi nhánh 2</option>
-                            </select>
+                            <form action="{{ route('room_type.show') }}" method="GET" class="flow" style="--flow-spacer:1em">
+                                <select name="branches[]" id="branches" multiple>
+                                    @foreach ($branches as $branch)
+                                        <option value="{{ $branch->id }}"
+                                            @foreach($room_type_list as $room_type)
+                                                @if($room_type->branches->pluck('id')->contains($branch->id))
+                                                    selected
+                                                    @break
+                                                @endif
+                                            @endforeach
+                                            >
+                                            {{$branch->name}}
+                                        </option>
+                                    @endforeach--
+                                </select>
+                                <button type="submit" class="button">Lọc</button>
+                            </form>
                         </div>
                         <form class="room-status | box | flow" style="--flow-spacer:1em">
                             <label class="label" for="room-status">Trạng thái</label>
@@ -70,7 +82,7 @@
                                         </use>
                                     </svg>
                                     <ul class="add-new-list">
-                                        <li >
+                                        <li>
                                             <a href="" data-bs-toggle="modal" data-bs-target="#add-new-room-type">
                                                 <svg class="icon" data-size="small">
                                                     <use xlink:href="{{asset('icon/admin/filter-buttons.svg#plus')}}">
@@ -88,22 +100,153 @@
                                         </li>
                                     </ul>
                                 </button>
-                                {{-- modal add new room type --}}
-                                <div class="modal fade" id="add-new-room-type" tabindex="-1" aria-labelledby="add_new-room-type" aria-hidden="true">
+                                {{-- modal bootstrap add new room type --}}
+                                <div class="modal fade" id="add-new-room-type" tabindex="-1"
+                                    aria-labelledby="add_new-room-type" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm hạng phòng mới</h1>
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm hạng phòng mới
+                                                </h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                ...
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                <form method="POST" action="{{ route('room_type.store') }}"
+                                                    id="add-new-room-type-form">
+                                                    @csrf
+                                                    <div class="mb-3 row">
+                                                        <label for="name"
+                                                            class="col-sm-2 col-md-3 col-lg-4 col-form-label">Tên hạng
+                                                            phòng</label>
+                                                        <div class="col-sm-10 col-sm-9 col-lg-8">
+                                                            <input type="text" class="form-control" name="name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 row">
+                                                        <label for="description"
+                                                            class="col-sm-2 col-md-3 col-lg-4 col-form-label">
+                                                            Mô tả</label>
+                                                        <div class="col-sm-10 col-sm-9 col-lg-8">
+                                                            <textarea class="form-control"
+                                                                name="description"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 row">
+                                                        <label for="quantity"
+                                                            class="col-sm-2 col-md-3 col-lg-4 col-form-label">
+                                                            Số lượng phòng</label>
+                                                        <div class="col-sm-10 col-sm-9 col-lg-8">
+                                                            <input type="number" class="form-control" name="quantity">
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 row">
+                                                        <label for="hourly_rate"
+                                                            class="col-sm-2 col-md-3 col-lg-4 col-form-label">Giá
+                                                            giờ</label>
+                                                        <div class="col-sm-10 col-sm-9 col-lg-8">
+                                                            <input type="number" class="form-control"
+                                                                name="hourly_rate">
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 row">
+                                                        <label for="full_day_rate"
+                                                            class="col-sm-2 col-md-3 col-lg-4 col-form-label">Giá
+                                                            ngày</label>
+                                                        <div class="col-sm-10 col-sm-9 col-lg-8">
+                                                            <input type="number" class="form-control"
+                                                                name="full_day_rate">
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 row">
+                                                        <label for="overnight_rate"
+                                                            class="col-sm-2 col-md-3 col-lg-4 col-form-label">Gía qua
+                                                            đêm</label>
+                                                        <div class="col-sm-10 col-sm-9 col-lg-8">
+                                                            <input type="number" class="form-control"
+                                                                name="overnight_rate">
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 row">
+                                                        <label for="status"
+                                                            class="col-sm-2 col-md-3 col-lg-4 col-form-label">
+                                                            Trạng thái</label>
+                                                        <div class="col-sm-10 col-sm-9 col-lg-8">
+                                                            <select class="form-select" name="status">
+                                                                <option value="Đang kinh doanh">
+                                                                    Đang kinh doanh
+                                                                </option>
+                                                                <option value="Ngừng kinh doanh">
+                                                                    Ngừng kinh doanh
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 row">
+                                                        <label for="branch_id"
+                                                            class="col-sm-2 col-md-3 col-lg-4 col-form-label">
+                                                            Chi nhánh</label>
+                                                        <div class="col-sm-10 col-sm-9 col-lg-8">
+                                                            <select class="form-select" name="branch_id">
+                                                                @foreach ($branches as $branch)
+                                                                    <option value="{{ $branch->id }}"
+                                                                        @selected(old('branch') == $branch)>
+                                                                        {{$branch->name}}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    {{-- code sau --}}
+                                                    {{-- <div class="box form-box | mb-3">
+                                                        <div class="form-box__title | padding-block-400">
+                                                            <span class="label">Sức chứa</span>
+                                                        </div>
+                                                        <div class="form-box__content | padding-block-200">
+                                                            <div class="my-3 row">
+                                                                <label for="standard_capacity"
+                                                                    class="col-sm-2 col-md-3 col-form-label">
+                                                                    Tiêu chuẩn
+                                                                </label>
+                                                                <div
+                                                                    class="col-sm-10 col-md-9 | row gap-2 align-items-center">
+                                                                    <input data-type="small" type="number"
+                                                                        class="form-control" name="standard_capacity"
+                                                                        min="1" max="4">
+                                                                    người lớn và
+                                                                    <input data-type="small" type="number"
+                                                                        class="form-control" name="standard_capacity"
+                                                                        min="0">
+                                                                    trẻ em
+                                                                </div>
+                                                            </div>
+                                                            <div class="my-3 row">
+                                                                <label for="maximum_capacity"
+                                                                    class="col-sm-2 col-md-3 col-form-label">
+                                                                    Tối đa</label>
+                                                                <div
+                                                                    class="col-sm-10 col-md-9 | row gap-2 align-items-center">
+                                                                    <input data-type="small" type="number"
+                                                                        class="form-control" name="maximum_capacity"
+                                                                        min="1" max="4">
+                                                                    người lớn và
+                                                                    <input data-type="small" type="number"
+                                                                        class="form-control" name="maximum_capacity"
+                                                                        min="0">
+                                                                    trẻ em
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div> --}}
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save
+                                                            changes</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -213,12 +356,12 @@
                                         <th>Full Day Rate</th>
                                         <th>Overnight Rate</th>
                                         <th>Status</th>
-                                        <th>Branch</th>
+                                        {{-- <th>Branch</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($room_type_list as $room_type)
-                                        <tr>
+                                        <tr data-id={{ $room_type->id }}>
                                             <td></td>
                                             <td data-cell="name">{{$room_type->name}}</td>
                                             <td data-cell="desciption">{{$room_type->description}}</td>
@@ -226,9 +369,12 @@
                                             <td data-cell="hourly_rate">{{$room_type->hourly_rate}}</td>
                                             <td data-cell="full_day_rate">{{$room_type->full_day_rate}}</td>
                                             <td data-cell="overnight_rate">{{$room_type->overnight_rate}}</td>
-                                            <td data-cell="statud">{{$room_type->status}}</td>
-                                            <td data-cell="branch">{{$room_type->branch->name}}</td>
+                                            <td data-cell="status">{{$room_type->status}}</td>
+                                            {{-- <td data-cell="branch">
+                                                {{ implode(', ', $room_type->branches->pluck('name')->toArray()) }}
+                                            </td> --}}
                                         </tr>
+
                                     @endforeach
                                 </tbody>
                             </table>
@@ -238,7 +384,37 @@
                         </div>
                     </div>
                 </section>
+
+                {{-- modal delete room type --}}
+                <div class="modal fade" id="delete-room-type" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5">Xóa hạng phòng</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Bạn chắc chắn muốn xóa hạng phòng này không ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <form action="{{ route('room_type.destroy', $room_type->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn | danger-button"><span>Delete</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 </x-admin-layout>
+
+<script>
+    const destroyRoute = "{{ route('room_type.destroy', ':id') }}"; // :id sẽ thay bằng JS
+</script>
