@@ -20,6 +20,7 @@ Route::prefix('admin')->group(function () {
     Route::singleton('', AdminController::class);
     Route::apiResource('room_type', RoomTypeController::class)->except('show');
     Route::get('/room_type/show',[RoomTypeController::class,'show'])->name('room_type.show');
+    Route::patch('/room_type/update_status/{room_type}',[RoomTypeController::class,'update_status'])->name('room_type.update_status');
 });
 
 

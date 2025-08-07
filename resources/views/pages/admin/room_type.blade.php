@@ -9,21 +9,19 @@
                             <input type="text" name="room-type-search" placeholder="Tìm kiếm hạng phòng">
                         </div>
                         <div class="box add-branch-list | flow" style="--flow-spacer:1em">
-                            <label class="label" for="branches">Chi nhánh</label>
-                            <form action="{{ route('room_type.show') }}" method="GET" class="flow" style="--flow-spacer:1em">
-                                <select name="branches[]" id="branches" multiple>
-                                    @foreach ($branches as $branch)
-                                        <option value="{{ $branch->id }}"
-                                            @foreach($room_type_list as $room_type)
-                                                @if($room_type->branches->pluck('id')->contains($branch->id))
-                                                    selected
-                                                    @break
-                                                @endif
-                                            @endforeach
-                                            >
-                                            {{$branch->name}}
+                            <label class="label" for="filter_branches">Chi nhánh</label>
+                            <form action="{{ route('room_type.show') }}" method="GET" class="flow"
+                                style="--flow-spacer:1em">
+                                <select name="filter_branches[]" id="filter_branches" multiple>
+                                    @php
+                                        $selected = collect(session('filter_branches', []));
+                                    @endphp
+                                    @foreach($branches as $branch)
+                                        <option value="{{ $branch->id }}" @if($selected->contains($branch->id)) selected
+                                        @endif>
+                                            {{ $branch->name }}
                                         </option>
-                                    @endforeach--
+                                    @endforeach
                                 </select>
                                 <button type="submit" class="button">Lọc</button>
                             </form>
@@ -31,23 +29,23 @@
                         <form class="room-status | box | flow" style="--flow-spacer:1em">
                             <label class="label" for="room-status">Trạng thái</label>
                             <div class="radio-select | form-check">
-                                <input class="form-check-input" type="radio" name="status" value="active"
+                                <input class="form-check-input" type="radio" name="filter-status" value="active"
                                     id="active-room">
-                                <label class="form-check-label" for="status">
+                                <label class="form-check-label" for="filter-status">
                                     Đang kinh doanh
                                 </label>
                             </div>
                             <div class="radio-select | form-check">
-                                <input class="form-check-input" type="radio" name="status" value="inactive"
+                                <input class="form-check-input" type="radio" name="filter-status" value="inactive"
                                     id="inactive-room">
-                                <label class="form-check-label" for="status">
+                                <label class="form-check-label" for="filter-status">
                                     Ngừng kinh doanh
                                 </label>
                             </div>
                             <div class="radio-select | form-check">
-                                <input class="form-check-input" type="radio" name="status" value="all" id="all-room"
-                                    checked>
-                                <label class="form-check-label" for="status">
+                                <input class="form-check-input" type="radio" name="filter-status" value="all"
+                                    id="all-room" checked>
+                                <label class="form-check-label" for="filter-status">
                                     Tất cả
                                 </label>
                             </div>
@@ -183,11 +181,11 @@
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
-                                                        <label for="branch_id"
+                                                        <label for="add_branches"
                                                             class="col-sm-2 col-md-3 col-lg-4 col-form-label">
                                                             Chi nhánh</label>
                                                         <div class="col-sm-10 col-sm-9 col-lg-8">
-                                                            <select class="form-select" name="branch_id">
+                                                            <select id="add_branches" name="add_branches[]" multiple>
                                                                 @foreach ($branches as $branch)
                                                                     <option value="{{ $branch->id }}"
                                                                         @selected(old('branch') == $branch)>
@@ -264,21 +262,21 @@
                                         </svg>
                                     </div>
                                     <ul class="toggle-columns-list">
-                                        <li class="toggle-item toggle-vis | form-check">
+                                        <li class="toggle-visible-column | form-check">
                                             <input class="form-check-input" type="checkbox" name="name" data-column="1"
                                                 id="name" checked>
                                             <label class="form-check-label" for="name">
                                                 Tên hạng phòng
                                             </label>
                                         </li>
-                                        <li class="toggle-item toggle-vis | form-check">
+                                        <li class="toggle-visible-column | form-check">
                                             <input class="form-check-input" type="checkbox" name="quantity"
                                                 data-column="3" id="quantity" checked>
                                             <label class="form-check-label" for="quantity">
                                                 Số lượng phòng
                                             </label>
                                         </li>
-                                        <li class="toggle-item toggle-vis | form-check">
+                                        <li class="toggle-visible-column | form-check">
                                             <input class="form-check-input" type="checkbox" name="hourly_rate"
                                                 data-column="4" id="hourly_rate" checked>
                                             <label class="form-check-label" for="hourly_rate">
@@ -286,35 +284,35 @@
                                             </label>
 
                                         </li>
-                                        <li class="toggle-item toggle-vis | form-check">
+                                        <li class="toggle-visible-column | form-check">
                                             <input class="form-check-input" type="checkbox" name="full_day_rate"
                                                 data-column="5" id="full_day_rate" checked>
                                             <label class="form-check-label" for="full_day_rate">
                                                 Giá cả ngày
                                             </label>
                                         </li>
-                                        <li class="toggle-item toggle-vis | form-check">
+                                        <li class="toggle-visible-column | form-check">
                                             <input class="form-check-input" type="checkbox" name="overnight_rate"
                                                 data-column="6" id="overnight_rate" checked>
                                             <label class="form-check-label" for="overnight_rate">
                                                 Giá qua đêm
                                             </label>
                                         </li>
-                                        <li class="toggle-item toggle-vis | form-check">
+                                        <li class="toggle-visible-column | form-check">
                                             <input class="form-check-input" type="checkbox" name="status"
                                                 data-column="7" id="status" checked>
                                             <label class="form-check-label" for="status">
                                                 Trạng thái
                                             </label>
                                         </li>
-                                        <li class="toggle-item toggle-vis | form-check">
+                                        <li class="toggle-visible-column | form-check">
                                             <input class="form-check-input" type="checkbox" name="branch"
                                                 data-column="8" id="branch" checked>
                                             <label class="form-check-label" for="branch">
                                                 Chi nhánh
                                             </label>
                                         </li>
-                                        <li class="toggle-item toggle-vis | form-check">
+                                        <li class="toggle-visible-column | form-check">
                                             <input class="form-check-input" type="checkbox" name="img" data-column=""
                                                 id="img" checked>
                                             <label class="form-check-label" for="img">
@@ -356,7 +354,7 @@
                                         <th>Full Day Rate</th>
                                         <th>Overnight Rate</th>
                                         <th>Status</th>
-                                        {{-- <th>Branch</th> --}}
+                                        <th>Branch</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -370,9 +368,9 @@
                                             <td data-cell="full_day_rate">{{$room_type->full_day_rate}}</td>
                                             <td data-cell="overnight_rate">{{$room_type->overnight_rate}}</td>
                                             <td data-cell="status">{{$room_type->status}}</td>
-                                            {{-- <td data-cell="branch">
-                                                {{ implode(', ', $room_type->branches->pluck('name')->toArray()) }}
-                                            </td> --}}
+                                            <td data-cell="branch">
+                                                {{ implode(', ', $room_type->branches->pluck('id')->toArray()) }}
+                                            </td>
                                         </tr>
 
                                     @endforeach
@@ -384,26 +382,166 @@
                         </div>
                     </div>
                 </section>
-
-                {{-- modal delete room type --}}
-                <div class="modal fade" id="delete-room-type" data-bs-backdrop="static" data-bs-keyboard="false"
-                    tabindex="-1" aria-labelledby="staticBackdropLabel">
+                {{-- modal update room type --}}
+                <div class="modal fade" id="update-room-type" tabindex="-1" aria-labelledby="update-room-type"
+                    aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5">Xóa hạng phòng</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Cập nhật hạng phòng
+                                </h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                Bạn chắc chắn muốn xóa hạng phòng này không ?
+                                <form method="POST" action="{{ route('room_type.update', 1) }}"
+                                    id="add-new-room-type-form">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="mb-3 row">
+                                        <label for="name" class="col-sm-2 col-md-3 col-lg-4 col-form-label">Tên hạng
+                                            phòng</label>
+                                        <div class="col-sm-10 col-sm-9 col-lg-8">
+                                            <input type="text" class="form-control" name="name">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="description" class="col-sm-2 col-md-3 col-lg-4 col-form-label">
+                                            Mô tả</label>
+                                        <div class="col-sm-10 col-sm-9 col-lg-8">
+                                            <textarea class="form-control" name="description"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="quantity" class="col-sm-2 col-md-3 col-lg-4 col-form-label">
+                                            Số lượng phòng</label>
+                                        <div class="col-sm-10 col-sm-9 col-lg-8">
+                                            <input type="number" class="form-control" name="quantity">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="hourly_rate" class="col-sm-2 col-md-3 col-lg-4 col-form-label">Giá
+                                            giờ</label>
+                                        <div class="col-sm-10 col-sm-9 col-lg-8">
+                                            <input type="number" class="form-control" name="hourly_rate">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="full_day_rate" class="col-sm-2 col-md-3 col-lg-4 col-form-label">Giá
+                                            ngày</label>
+                                        <div class="col-sm-10 col-sm-9 col-lg-8">
+                                            <input type="number" class="form-control" name="full_day_rate">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="overnight_rate"
+                                            class="col-sm-2 col-md-3 col-lg-4 col-form-label">Gía qua
+                                            đêm</label>
+                                        <div class="col-sm-10 col-sm-9 col-lg-8">
+                                            <input type="number" class="form-control" name="overnight_rate">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="status" class="col-sm-2 col-md-3 col-lg-4 col-form-label">
+                                            Trạng thái</label>
+                                        <div class="col-sm-10 col-sm-9 col-lg-8">
+                                            <select class="form-select" name="status">
+                                                <option value="Đang kinh doanh">
+                                                    Đang kinh doanh
+                                                </option>
+                                                <option value="Ngừng kinh doanh">
+                                                    Ngừng kinh doanh
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="update_branches" class="col-sm-2 col-md-3 col-lg-4 col-form-label">
+                                            Chi nhánh</label>
+                                        <div class="col-sm-10 col-sm-9 col-lg-8">
+                                            <select id="update_branches" name="update_branches[]" multiple>
+                                                @foreach ($branches as $branch)
+                                                    <option value="{{ $branch->id }}">
+                                                        {{$branch->name}}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    {{-- code sau --}}
+                                    {{-- <div class="box form-box | mb-3">
+                                                        <div class="form-box__title | padding-block-400">
+                                                            <span class="label">Sức chứa</span>
+                                                        </div>
+                                                        <div class="form-box__content | padding-block-200">
+                                                            <div class="my-3 row">
+                                                                <label for="standard_capacity"
+                                                                    class="col-sm-2 col-md-3 col-form-label">
+                                                                    Tiêu chuẩn
+                                                                </label>
+                                                                <div
+                                                                    class="col-sm-10 col-md-9 | row gap-2 align-items-center">
+                                                                    <input data-type="small" type="number"
+                                                                        class="form-control" name="standard_capacity"
+                                                                        min="1" max="4">
+                                                                    người lớn và
+                                                                    <input data-type="small" type="number"
+                                                                        class="form-control" name="standard_capacity"
+                                                                        min="0">
+                                                                    trẻ em
+                                                                </div>
+                                                            </div>
+                                                            <div class="my-3 row">
+                                                                <label for="maximum_capacity"
+                                                                    class="col-sm-2 col-md-3 col-form-label">
+                                                                    Tối đa</label>
+                                                                <div
+                                                                    class="col-sm-10 col-md-9 | row gap-2 align-items-center">
+                                                                    <input data-type="small" type="number"
+                                                                        class="form-control" name="maximum_capacity"
+                                                                        min="1" max="4">
+                                                                    người lớn và
+                                                                    <input data-type="small" type="number"
+                                                                        class="form-control" name="maximum_capacity"
+                                                                        min="0">
+                                                                    trẻ em
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div> --}}
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Save
+                                            changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- modal update room type status--}}
+                <div class="modal fade" id="update-room-type-status" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5">Cập nhật trạng thái hạng phòng</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Bạn chắc chắn muốn thay đổi trạng thái hạng phòng không ?
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <form action="{{ route('room_type.destroy', $room_type->id) }}" method="POST">
+                                <form action="{{ route('room_type.update_status', $room_type->id) }}" method="POST">
                                     @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn | danger-button"><span>Delete</span>
+                                    @method('PATCH')
+                                    <button type="submit" class="btn | success-button"><span>Update</span>
                                     </button>
                                 </form>
                             </div>
@@ -411,6 +549,32 @@
                     </div>
                 </div>
             </div>
+
+            {{-- modal delete room type --}}
+            <div class="modal fade" id="delete-room-type" data-bs-backdrop="static" data-bs-keyboard="false"
+                tabindex="-1" aria-labelledby="staticBackdropLabel">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5">Xóa hạng phòng</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Bạn chắc chắn muốn xóa hạng phòng này không ?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <form action="{{ route('room_type.destroy', $room_type->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn | danger-button"><span>Delete</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
     </main>
 </x-admin-layout>
