@@ -109,7 +109,43 @@ class RoomTypeController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $validated = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'quantity' => 'min:1|max:10',
+            'hourly_rate' => 'required|numeric|lt:overnight_rate',
+            'full_day_rate' => 'required|numeric|gt:overnight_rate',
+            'overnight_rate' => 'required|numeric|gt:hourly_rate|lt:full_day_rate',
+            'status' => 'required|max:50',
+        ]);
 
+        $room_type = RoomType::find($id);
+        $room_type->update($validated);
+
+        // update các chi nhánh nếu có thay đổi
+        // Lấy danh sách branch id hợp lệ
+        $branchIds = Branch::pluck('id');
+
+        // Lấy input từ request (nếu là mảng thì xử lý mảng, nếu 1 id thì xử lý 1 id)
+        $inputBranchIds = $request->input('update_branches');
+
+        if (is_array($inputBranchIds)) {
+            // ép kiểu sang int tất cả phần tử
+            $inputBranchIds = collect($inputBranchIds)->map(fn($id) => (int) $id);
+
+            // lọc các id hợp lệ
+            $validBranchIds = $inputBranchIds->filter(fn($id) => $branchIds ->contains($id));
+
+            if ($validBranchIds->isNotEmpty()) {
+                $room_type->branches()->sync($validBranchIds->toArray());
+            }
+        } else {
+            $branchId = (int)$inputBranchIds;
+            if ($branchIds->contains($branchId)) {
+                $room_type->branches()->sync($branchId);
+            }
+        }
+        return redirect()->route('room_type.index');
     }
 
     public function update_status(string $id)

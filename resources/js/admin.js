@@ -130,10 +130,12 @@ function format(d, id) {
                 <svg class="icon" data-size="small" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M530.8 134.1C545.1 144.5 548.3 164.5 537.9 178.8L281.9 530.8C276.4 538.4 267.9 543.1 258.5 543.9C249.1 544.7 240 541.2 233.4 534.6L105.4 406.6C92.9 394.1 92.9 373.8 105.4 361.3C117.9 348.8 138.2 348.8 150.7 361.3L252.2 462.8L486.2 141.1C496.6 126.8 516.6 123.6 530.9 134z"/></svg>
                 <span>Cập nhật</span>
             </button>
-            <button class="button danger-button" data-id="${id}" data-bs-toggle="modal" data-bs-target="#update-room-type-status">
-                <svg class="icon" data-size="small" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M256 160L256 224L384 224L384 160C384 124.7 355.3 96 320 96C284.7 96 256 124.7 256 160zM192 224L192 160C192 89.3 249.3 32 320 32C390.7 32 448 89.3 448 160L448 224C483.3 224 512 252.7 512 288L512 512C512 547.3 483.3 576 448 576L192 576C156.7 576 128 547.3 128 512L128 288C128 252.7 156.7 224 192 224z"/></svg>
-                <span>Ngừng kinh doanh</span>
-            </button>
+            ${d.status === 'Đang kinh doanh' ? `
+                <button class="button danger-button" data-id="${id}" data-bs-toggle="modal" data-bs-target="#update-room-type-status">
+                    <svg class="icon" data-size="small" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M256 160L256 224L384 224L384 160C384 124.7 355.3 96 320 96C284.7 96 256 124.7 256 160zM192 224L192 160C192 89.3 249.3 32 320 32C390.7 32 448 89.3 448 160L448 224C483.3 224 512 252.7 512 288L512 512C512 547.3 483.3 576 448 576L192 576C156.7 576 128 547.3 128 512L128 288C128 252.7 156.7 224 192 224z"/></svg>
+                    <span>Ngừng kinh doanh</span>
+                </button>
+            ` : ''}
             <button class="button danger-button" data-id="${id}" data-bs-toggle="modal" data-bs-target="#delete-room-type">
                 <svg class="icon" data-size="small" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M232.7 69.9L224 96L128 96C110.3 96 96 110.3 96 128C96 145.7 110.3 160 128 160L512 160C529.7 160 544 145.7 544 128C544 110.3 529.7 96 512 96L416 96L407.3 69.9C402.9 56.8 390.7 48 376.9 48L263.1 48C249.3 48 237.1 56.8 232.7 69.9zM512 208L128 208L149.1 531.1C150.7 556.4 171.7 576 197 576L443 576C468.3 576 489.3 556.4 490.9 531.1L512 208z"/></svg>
                 <span>Xóa</span>
@@ -149,24 +151,32 @@ function format(d, id) {
 document
     .querySelectorAll('button[data-bs-toggle="modal"]')
     .forEach((button) => {
-        console.log(button);
         button.addEventListener("click", function () {
             const id = this.dataset.id;
 
             // Dùng route mẫu rồi thay {id}
-            const routeTemplate = "{{ route('room-type.destroy', ':id') }}";
-            const finalRoute = routeTemplate.replace(":id", id);
+            const updateRoute = "{{ route('room-type.update', ':id') }}";
+            const updateStatusRoute = "{{ route('room-type.update_status', ':id') }}";
+            const deleteRoute = "{{ route('room-type.destroy', ':id') }}";
+            updateRoute = updateRoute.replace(":id", id);
+            updateStatusRoute = updateStatusRoute.replace(":id", id);
+            deleteRoute = deleteRoute.replace(":id", id);
 
             // Gán action vào form
+             document
+                .getElementById("update-room-type")
+                .querySelector("form")
+                .setAttribute("action", updateRoute);
+
             document
                 .getElementById("delete-room-type")
                 .querySelector("form")
-                .setAttribute("action", finalRoute);
+                .setAttribute("action", deleteRoute);
 
             document
                 .getElementById("update-room-type-status")
                 .querySelector("form")
-                .setAttribute("action", finalRoute);
+                .setAttribute("action", updateStatusRoute);
         });
     });
 
@@ -189,6 +199,7 @@ roomTypeTable.on("click", "tbody tr td.dt-control", function (e) {
         });
     } else {
         // Open this row
+        console.log(row.data().status);
         row.child(format(row.data(), id)).show();
         activeBtn.fadeOut(100, function () {
             activeBtn
@@ -223,11 +234,6 @@ roomTypeTable.on("click", "tbody tr td.dt-control", function (e) {
                 $('#update-room-type form select[name="status"]').val(
                     row.data().status
                 );
-                let selectedVal = row
-                    .data()
-                    .branch.split(",")
-                    .map((item) => item.trim());
-                $("#update_branches").val(selectedVal).trigger("change");
             }
         );
         $("#update-room-type").on("shown.bs.modal", function () {

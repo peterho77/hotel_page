@@ -369,7 +369,7 @@
                                             <td data-cell="overnight_rate">{{$room_type->overnight_rate}}</td>
                                             <td data-cell="status">{{$room_type->status}}</td>
                                             <td data-cell="branch">
-                                                {{ implode(', ', $room_type->branches->pluck('id')->toArray()) }}
+                                                {{ implode(', ', $room_type->branches->pluck('name')->toArray()) }}
                                             </td>
                                         </tr>
 
@@ -394,8 +394,7 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form method="POST" action="{{ route('room_type.update', 1) }}"
-                                    id="add-new-room-type-form">
+                                <form method="POST" action="{{ route('room_type.update', $room_type->id) }}">
                                     @csrf
                                     @method('PUT')
                                     <div class="mb-3 row">
