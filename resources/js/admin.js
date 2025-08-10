@@ -17,6 +17,7 @@ import "../css/admin/multi-select-tag.min.css";
 import { MultiSelectTag } from "./multi-select-tag.min.js";
 
 // custom js
+import "./custom mutiple select.js"
 import "./script.js";
 
 // toggle columns button

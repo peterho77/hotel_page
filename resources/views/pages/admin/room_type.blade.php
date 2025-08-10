@@ -26,6 +26,11 @@
                                 <button type="submit" class="button">Lọc</button>
                             </form>
                         </div>
+
+                        {{-- custom mutiple select tag --}}
+                        <div class="box | flow" style="--flow-spacer:1em">
+                           <x-utility.mutile-select-tag/>
+                        </div>
                         <form class="room-status | box | flow" style="--flow-spacer:1em">
                             <label class="label" for="room-status">Trạng thái</label>
                             <div class="radio-select | form-check">
@@ -326,18 +331,20 @@
                     </nav>
 
                     {{-- nav tab bootstrap --}}
-                    <nav>
-                        <div class="nav nav-tabs" id="nav-tab">
-                            <button class="nav-link active" id="nav-room-type-tab" data-bs-toggle="tab"
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="nav-room-type-tab" data-bs-toggle="pill"
                                 data-bs-target="#nav-room-type" type="button" role="tab" aria-controls="nav-room-type"
                                 aria-selected="true">Hạng phòng
                             </button>
-                            <button class="nav-link" id="nav-room-list-tab" data-bs-toggle="tab"
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="nav-room-list-tab" data-bs-toggle="pill"
                                 data-bs-target="#nav-room-list" type="button" role="tab" aria-controls="nav-room-list"
                                 aria-selected="false">Danh sách phòng
                             </button>
-                        </div>
-                    </nav>
+                        </li>
+                    </ul>
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-room-type" role="tabpanel"
                             aria-labelledby="nav-room-type" tabindex="0">
