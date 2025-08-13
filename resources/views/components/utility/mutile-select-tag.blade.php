@@ -1,3 +1,5 @@
+@props(['branches'])
+
 <div class="custom-select">
     <div class="select-box">
         <input type="text" class="tags-input" name="tags" hidden />
@@ -13,12 +15,9 @@
     </div>
     <div class="options">
         <div class="option all-tags" data-value="All">Select All</div>
-        <div class="option" data-value="Navy">Navy</div>
-        <div class="option" data-value="Black">Black</div>
-        <div class="option" data-value="Green">Green</div>
-        <div class="option" data-value="Orange">Orange</div>
-        <div class="option" data-value="Pink">Pink</div>
-        <div class="option" data-value="Red">Red</div>
+        @foreach ($branches as $branch)
+            <div class="option" data-value="{{ $branch->id }}">{{$branch->name}}</div>
+        @endforeach
         <div class="no-result-message" style="display: none">
             No result match
         </div>

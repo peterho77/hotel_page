@@ -29,7 +29,7 @@
 
                         {{-- custom mutiple select tag --}}
                         <div class="box | flow" style="--flow-spacer:1em">
-                           <x-utility.mutile-select-tag/>
+                           <x-utility.mutile-select-tag :$branches/>
                         </div>
                         <form class="room-status | box | flow" style="--flow-spacer:1em">
                             <label class="label" for="room-status">Trạng thái</label>
