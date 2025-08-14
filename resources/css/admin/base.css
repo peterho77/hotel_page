@@ -59,7 +59,7 @@
     --neutral-color-800: hsl(224, 24%, 15%);
     --neutral-color-900: hsl(240, 2%, 10%);
 
-    --text-color: hsl(295, 6%, 37%);
+    --text-color: var(--neutral-color-500);
 
     /* size */
     --size-100: 0.25rem;
@@ -719,10 +719,19 @@ table.dataTable > thead {
     padding: var(--size-300);
     cursor: pointer;
 }
-.custom-select .selected-options {
+.custom-select .selected-area{
     display: flex;
     flex-wrap: wrap;
     margin-top: 0;
+}
+.custom-select .placeholder{
+    background: transparent;
+    color: var(--text-color);
+    opacity: 1;
+}
+.custom-select .selected-options {
+    display: flex;
+    flex-wrap: wrap;
 }
 .custom-select .tag {
     background: #f2f2f2;

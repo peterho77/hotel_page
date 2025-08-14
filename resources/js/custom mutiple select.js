@@ -21,14 +21,12 @@ export function updateSelectedOptions(customSelect) {
         return option.text;
     });
 
-    customSelect.querySelector(".tags-input").value = selectedText.join("|");
-
-    console.log(customSelect.querySelector(".tags-input").value);
+    customSelect.querySelector(".tags-input").value = selectedValues.join(", ");
 
     let tagsHTML = "";
 
     if (selectedOptions.length === 0) {
-        tagsHTML = `<span>Select the tags</span>`;
+        customSelect.querySelector(".selected-area .placeholder").style.display = "block";
     } else {
         const maxTagsToShow = 4;
         let additionalTagsCount = 0;
@@ -49,6 +47,7 @@ export function updateSelectedOptions(customSelect) {
         if (additionalTagsCount > 0) {
             tagsHTML += `<span class="tag">+` + additionalTagsCount + `</span>`;
         }
+        customSelect.querySelector(".selected-area .placeholder").style.display = "none";
     }
     customSelect.querySelector(".selected-options").innerHTML = tagsHTML;
 

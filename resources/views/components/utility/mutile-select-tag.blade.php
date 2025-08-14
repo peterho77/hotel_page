@@ -1,9 +1,12 @@
-@props(['branches'])
+@props(['branches', 'placeholder'])
 
 <div class="custom-select">
     <div class="select-box">
         <input type="text" class="tags-input" name="tags" hidden />
-        <div class="selected-options">
+        <div class="selected-area">
+            <span class="placeholder">{{ $placeholder }}</span>
+            <div class="selected-options">
+            </div>
         </div>
         <div class="arrow">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="black" width="20" height="20">

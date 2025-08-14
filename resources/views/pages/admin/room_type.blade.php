@@ -8,28 +8,10 @@
                             <label class="label" for="room-type-search">Tìm kiếm</label>
                             <input type="text" name="room-type-search" placeholder="Tìm kiếm hạng phòng">
                         </div>
-                        <div class="box add-branch-list | flow" style="--flow-spacer:1em">
-                            <label class="label" for="filter_branches">Chi nhánh</label>
-                            <form action="{{ route('room_type.show') }}" method="GET" class="flow"
-                                style="--flow-spacer:1em">
-                                <select name="filter_branches[]" id="filter_branches" multiple>
-                                    @php
-                                        $selected = collect(session('filter_branches', []));
-                                    @endphp
-                                    @foreach($branches as $branch)
-                                        <option value="{{ $branch->id }}" @if($selected->contains($branch->id)) selected
-                                        @endif>
-                                            {{ $branch->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <button type="submit" class="button">Lọc</button>
-                            </form>
-                        </div>
 
                         {{-- custom mutiple select tag --}}
                         <div class="box | flow" style="--flow-spacer:1em">
-                           <x-utility.mutile-select-tag :$branches/>
+                           <x-utility.mutile-select-tag :$branches placeholder="Chọn chi nhánh"/>
                         </div>
                         <form class="room-status | box | flow" style="--flow-spacer:1em">
                             <label class="label" for="room-status">Trạng thái</label>

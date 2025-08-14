@@ -300,26 +300,6 @@ document.querySelectorAll(".toggle-visible-column").forEach((el) => {
 });
 
 // multi tag select
-var filterBranches = new MultiSelectTag("filter_branches", {
-    maxSelection: 5, // default unlimited.
-    required: true, // default false.
-    placeholder: "Chọn chi nhánh...", // default 'Search'.
-    onChange: function (selected) {
-        // Callback when selection changes.
-        console.log("Selection changed:", selected);
-        console.log(selected);
-        var selected_id = selected.map((item) => {
-            return item.id;
-        });
-        console.log(selected_id);
-        // if (selected) {
-        //     for (var item of findObject) {
-        //         roomTypeTable.column("8").search(item, { exact: true });
-        //     }
-        //     roomTypeTable.draw();
-        // }
-    },
-});
 
 var addBranches = new MultiSelectTag("add_branches", {
     maxSelection: 5, // default unlimited.
@@ -391,7 +371,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const customSelect = document.querySelector(".custom-select");
     customSelect.addEventListener("click", function (event) {
         let clickElement = event.target.closest(".option");
-        console.log(clickElement);
         if (clickElement) {       
             let sortBranch =
                 updateSelectedOptions(customSelect).join("|");
