@@ -36,6 +36,8 @@
 
     --neutral-color-100: hsl(0, 0%, 100%);
     --neutral-color-150: hsl(186, 100%, 96%);
+    --neutral-color-200: hsl(210, 14%, 97%);
+    --neutral-color-300: hsl(180, 1%, 87%);
     --neutral-color-400: hsl(144, 3%, 64%);
     --neutral-color-700: hsl(225, 23%, 17%);
     --neutral-color-800: hsl(224, 24%, 15%);
@@ -299,6 +301,11 @@ a {
     fill:var(--accent-color-400);
 }
 
+.flag-icon{
+    width: var(--size-600);
+    height: var(--size-600);
+}
+
 /* button */
 .button {
     display: inline-flex;
@@ -338,16 +345,24 @@ a {
     border-bottom: 1px solid var(--neutral-color-400);
 }
 
+/* list */
+ul[role="list"] > li{
+    padding-block: var(--size-200);
+    display: flex;
+    align-items: center;
+}
+
 /* nav wrapper */
 .nav-wrapper {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: space-between;
     gap: var(--size-700);
 }
 .nav-list {
+    min-height: 100%;
     display: flex;
-    align-items: stretch;
+    align-items: center;
     gap: var(--size-400);
 }
 
@@ -372,6 +387,10 @@ a {
     gap: var(--size-800);
 }
 
+.lang-list{
+    display: flex;
+    flex-direction: column;
+}
 
 /* set background image */
 .set-bg-img {

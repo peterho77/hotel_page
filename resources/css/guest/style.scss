@@ -38,15 +38,58 @@
     &__right {
         justify-content: flex-end;
 
-        .language-option {
+        .toggle-lang-switch {
+            position: relative;
             display: flex;
+            align-items: center;
             gap: var(--size-200);
+            cursor: pointer;
 
-            .switch {
+            .current-lang {
                 display: flex;
-                gap: var(--size-100);
+                gap: var(--size-200);
                 align-items: center;
                 cursor: pointer;
+
+                .icon{
+                    width: var(--size-300);
+                    color: var(--neutral-color-700);
+                }
+            }
+
+            &:hover{
+                .lang-list{
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+            
+            .lang-list{
+                z-index:3;
+                background-color: var(--neutral-color-100);
+                position: absolute;
+                top: calc(100% + .5rem);
+                left:0;
+                font-size: var(--fs-200);
+                width: 120px;
+                box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                
+                opacity:0;
+                visibility: hidden;
+                transition: all 0.3s;
+
+                li{
+                    padding: 0;
+                    width: 100%;
+
+                    a {
+                        padding: var(--size-200) var(--size-400);
+                    }
+
+                    &:hover{
+                        background-color: var(--neutral-color-300);
+                    }
+                }
             }
         }
     }
@@ -57,6 +100,7 @@
     .primary-bottom-nav {
         display: flex;
         justify-content: flex-end;
+        align-items: center;
 
         .nav-list {
             gap: var(--size-800);

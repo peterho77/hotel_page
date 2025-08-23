@@ -383,7 +383,7 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form method="POST" action="{{ route('room_type.update', $room_type->id) }}">
+                                <form method="POST" action="{{ route('room_type.update', "id") }}">
                                     @csrf
                                     @method('PUT')
                                     <div class="mb-3 row">
@@ -526,7 +526,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <form action="{{ route('room_type.update_status', $room_type->id) }}" method="POST">
+                                <form action="{{ route('room_type.update_status', "id") }}" method="POST">
                                     @csrf
                                     @method('PATCH')
                                     <button type="submit" class="btn | success-button"><span>Update</span>
@@ -552,7 +552,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <form action="{{ route('room_type.destroy', $room_type->id) }}" method="POST">
+                            <form action="{{ route('room_type.destroy', "id") }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn | danger-button"><span>Delete</span>

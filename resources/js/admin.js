@@ -17,7 +17,7 @@ import "../css/admin/multi-select-tag.min.css";
 import { MultiSelectTag } from "./multi-select-tag.min.js";
 
 // custom js
-import "./custom mutiple select.js";
+import "./custom-mutiple-select.js";
 import "./script.js";
 
 // toggle columns button
@@ -152,40 +152,6 @@ function format(d, id) {
     return detailInforList;
 }
 
-//gán action có route và id vào form từ button render từ js
-document
-    .querySelectorAll('button[data-bs-toggle="modal"]')
-    .forEach((button) => {
-        button.addEventListener("click", function () {
-            const id = this.dataset.id;
-
-            // Dùng route mẫu rồi thay {id}
-            const updateRoute = "{{ route('room-type.update', ':id') }}";
-            const updateStatusRoute =
-                "{{ route('room-type.update_status', ':id') }}";
-            const deleteRoute = "{{ route('room-type.destroy', ':id') }}";
-            updateRoute = updateRoute.replace(":id", id);
-            updateStatusRoute = updateStatusRoute.replace(":id", id);
-            deleteRoute = deleteRoute.replace(":id", id);
-
-            // Gán action vào form
-            document
-                .getElementById("update-room-type")
-                .querySelector("form")
-                .setAttribute("action", updateRoute);
-
-            document
-                .getElementById("delete-room-type")
-                .querySelector("form")
-                .setAttribute("action", deleteRoute);
-
-            document
-                .getElementById("update-room-type-status")
-                .querySelector("form")
-                .setAttribute("action", updateStatusRoute);
-        });
-    });
-
 // Add event listener for opening and closing details
 roomTypeTable.on("click", "tbody tr td.dt-control", function (e) {
     let tr = e.target.closest("tr");
@@ -241,50 +207,37 @@ roomTypeTable.on("click", "tbody tr td.dt-control", function (e) {
                 );
             }
         );
-        $("#update-room-type").on("shown.bs.modal", function () {
-            let selectedVal = row
-                .data()
-                .branch.split(",")
-                .map((item) => item.trim());
 
-            console.log(selectedVal);
+        //gán action có route và id vào form từ button render từ js
+        document
+            .querySelectorAll('button[data-bs-toggle="modal"]')
+            .forEach((button) => {
+                button.addEventListener("click", function () {
+                    const id = this.dataset.id;
 
-            $('#update-room-type select[name="update_branches[]"] option').each(
-                function () {
-                    const option = $(this);
-                    if (selectedVal.includes(option.val())) {
-                        console.log("true");
-                        option.prop("selected", true);
-                    }
-                }
-            );
-        });
+                    // Gán action vào form
+                    document
+                        .getElementById("update-room-type")
+                        .querySelector("form").action = document
+                        .getElementById("update-room-type")
+                        .querySelector("form")
+                        .action.replace("id", id);
 
-        // Giả sử đây là dữ liệu lấy từ hàng (row) nào đó
-        let rowData = {
-            branch: "1, 3", // Có thể là dữ liệu từ server hoặc DataTable
-        };
+                    document
+                        .getElementById("delete-room-type")
+                        .querySelector("form").action = document
+                        .getElementById("delete-room-type")
+                        .querySelector("form")
+                        .action.replace("id", id);
 
-        // Khi modal mở xong (sự kiện tự tạo hoặc bạn gắn vào nút mở modal)
-        function onModalShown() {
-            // Bước 1: Tách dữ liệu thành mảng giá trị
-            const selectedValues = rowData.branch
-                .split(",")
-                .map((item) => item.trim());
-
-            // Bước 2: Lấy thẻ select
-            const select = document.getElementById("update_branches");
-
-            // Bước 4: Gán lại selected cho các option khớp
-            for (const option of select.options) {
-                if (selectedValues.includes(option.value)) {
-                    option.selected = true;
-                }
-            }
-        }
-
-        // Gọi hàm này khi modal đã mở xong
-        onModalShown(); // hoặc gọi trong sự kiện modal Bootstrap như shown.bs.modal
+                    document
+                        .getElementById("update-room-type-status")
+                        .querySelector("form").action = document
+                        .getElementById("update-room-type-status")
+                        .querySelector("form")
+                        .action.replace("id", id);
+                });
+            });
     }
 });
 
@@ -371,15 +324,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const customSelect = document.querySelector(".custom-select");
     customSelect.addEventListener("click", function (event) {
         let clickElement = event.target.closest(".option");
-        if (clickElement) {       
-            let sortBranch =
-                updateSelectedOptions(customSelect).join("|");
+        if (clickElement) {
+            let sortBranch = updateSelectedOptions(customSelect).join("|");
             roomTypeTable.column(8).search(sortBranch, true, false).draw();
         }
     });
     customSelect.addEventListener("removeTagDone", function (event) {
-        let sortBranch =
-            updateSelectedOptions(customSelect).join("|");
+        let sortBranch = updateSelectedOptions(customSelect).join("|");
         roomTypeTable.column(8).search(sortBranch, true, false).draw();
     });
 });
+
