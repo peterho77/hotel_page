@@ -21,7 +21,7 @@ export function updateSelectedOptions(customSelect) {
         return option.text;
     });
 
-    customSelect.querySelector(".tags-input").value = selectedValues.join(", ");
+    customSelect.querySelector(".tags-input").value = selectedValues.join(",");
 
     let tagsHTML = "";
 
@@ -51,8 +51,11 @@ export function updateSelectedOptions(customSelect) {
     }
     customSelect.querySelector(".selected-options").innerHTML = tagsHTML;
 
+    console.log(selectedText);
+
     return selectedText;
 }
+
 document.addEventListener("DOMContentLoaded", function () {
     const customSelects = document.querySelectorAll(".custom-select");
 
@@ -143,31 +146,4 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
     updateSelectedOptions(customSelects[0]);
-
-    const submitButton = document.querySelector(".submit-button");
-    submitButton.addEventListener("click", () => {
-        let valid = true;
-
-        customSelects.forEach((customSelect) => {
-            const selectedOptions =
-                customSelect.querySelectorAll(".option.active");
-
-            const tagErrorMsg = customSelect.querySelector(".tag_error_msg");
-            if (selectedOptions.length === 0) {
-                tagErrorMsg.textContent = "This field is required";
-                tagErrorMsg.style.display = "block";
-                valid = false;
-            } else {
-                tagErrorMsg.textContent = "";
-                tagErrorMsg.style.display = "none";
-            }
-        });
-
-        if (valid) {
-            let tags = document.querySelector(".tags-input").value;
-            alert(tags);
-            resetCustomSelect();
-            return;
-        }
-    });
 });

@@ -1,8 +1,8 @@
-@props(['branches', 'placeholder'])
+@props(['id','list', 'placeholder'])
 
-<div class="custom-select">
+<div id="{{ $id }}" class="custom-select">
     <div class="select-box">
-        <input type="text" class="tags-input" name="tags" hidden />
+        <input type="text" class="tags-input" name="tags-list" hidden />
         <div class="selected-area">
             <span class="placeholder">{{ $placeholder }}</span>
             <div class="selected-options">
@@ -18,8 +18,8 @@
     </div>
     <div class="options">
         <div class="option all-tags" data-value="All">Select All</div>
-        @foreach ($branches as $branch)
-            <div class="option" data-value="{{ $branch->id }}">{{$branch->name}}</div>
+        @foreach ($list as $item)
+            <div class="option" data-value="{{ $item->id }}">{{$item->name}}</div>
         @endforeach
         <div class="no-result-message" style="display: none">
             No result match
@@ -27,4 +27,3 @@
     </div>
     <span class="tag_error_msg error"></span>
 </div>
-<input type="button" class="button submit-button" value="Lọc" />

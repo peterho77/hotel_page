@@ -11,7 +11,7 @@
 
                         {{-- custom mutiple select tag --}}
                         <div class="box | flow" style="--flow-spacer:1em">
-                           <x-utility.mutile-select-tag :$branches placeholder="Chọn chi nhánh"/>
+                           <x-utility.multiple-select-tag id="filter-branch-select" :list="$branches" placeholder="Chọn chi nhánh"/>
                         </div>
                         <form class="room-status | box | flow" style="--flow-spacer:1em">
                             <label class="label" for="room-status">Trạng thái</label>
@@ -85,7 +85,7 @@
                                         </li>
                                     </ul>
                                 </button>
-                                {{-- modal bootstrap add new room type --}}
+                                {{-- modal add new room type --}}
                                 <div class="modal fade" id="add-new-room-type" tabindex="-1"
                                     aria-labelledby="add_new-room-type" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -172,14 +172,7 @@
                                                             class="col-sm-2 col-md-3 col-lg-4 col-form-label">
                                                             Chi nhánh</label>
                                                         <div class="col-sm-10 col-sm-9 col-lg-8">
-                                                            <select id="add_branches" name="add_branches[]" multiple>
-                                                                @foreach ($branches as $branch)
-                                                                    <option value="{{ $branch->id }}"
-                                                                        @selected(old('branch') == $branch)>
-                                                                        {{$branch->name}}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
+                                                            <x-utility.multiple-select-tag id="add-branches" :list="$branches" placeholder="Chọn chi nhánh..."/>
                                                         </div>
                                                     </div>
 
@@ -447,13 +440,7 @@
                                         <label for="update_branches" class="col-sm-2 col-md-3 col-lg-4 col-form-label">
                                             Chi nhánh</label>
                                         <div class="col-sm-10 col-sm-9 col-lg-8">
-                                            <select id="update_branches" name="update_branches[]" multiple>
-                                                @foreach ($branches as $branch)
-                                                    <option value="{{ $branch->id }}">
-                                                        {{$branch->name}}
-                                                    </option>
-                                                @endforeach
-                                            </select>
+                                            <x-utility.multiple-select-tag id="update-branches" :list="$branches" placeholder="Chọn chi nhánh..."/>
                                         </div>
                                     </div>
 

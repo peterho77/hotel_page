@@ -12,12 +12,9 @@ import "../css/general/reset.css";
 import "../css/admin/base.css";
 import "../css/admin/style.scss";
 
-// multi-select-tag library
-import "../css/admin/multi-select-tag.min.css";
-import { MultiSelectTag } from "./multi-select-tag.min.js";
-
 // custom js
 import "./custom-mutiple-select.js";
+import { updateSelectedOptions } from "./custom-mutiple-select.js";
 import "./script.js";
 
 // toggle columns button
@@ -35,12 +32,6 @@ document.addEventListener("click", function (event) {
     ) {
         columnList.classList.remove("show");
     }
-});
-
-// lỗi aria-hidden của modal
-const modal = document.getElementsByClassName("modal");
-Array.from(modal).forEach((item) => {
-    item.removeAttribute("aria-hidden");
 });
 
 // data table jquery
@@ -205,6 +196,29 @@ roomTypeTable.on("click", "tbody tr td.dt-control", function (e) {
                 $('#update-room-type form select[name="status"]').val(
                     row.data().status
                 );
+
+                let hasMatch = false;
+                $("#update-branches.custom-select .options .option").each(
+                    (index, element) => {
+                        let optionText = $(element).text().trim();
+
+                        if (
+                            row
+                                .data()
+                                .branch.split(",")
+                                .map((item) => item.trim())
+                                .includes(optionText)
+                        ) {
+                            hasMatch = true;
+                            element.classList.add("active");
+                        }
+                    }
+                );
+                if (hasMatch) {
+                    updateSelectedOptions(
+                        document.querySelector("#update-branches.custom-select")
+                    );
+                }
             }
         );
 
@@ -252,50 +266,6 @@ document.querySelectorAll(".toggle-visible-column").forEach((el) => {
     });
 });
 
-// multi tag select
-
-var addBranches = new MultiSelectTag("add_branches", {
-    maxSelection: 5, // default unlimited.
-    required: true, // default false.
-    placeholder: "Chọn chi nhánh...", // default 'Search'.
-    onChange: function (selected) {
-        // Callback when selection changes.
-        console.log("Selection changed:", selected);
-        console.log(selected);
-        var selected_id = selected.map((item) => {
-            return item.id;
-        });
-        console.log(selected_id);
-        // if (selected) {
-        //     for (var item of findObject) {
-        //         roomTypeTable.column("8").search(item, { exact: true });
-        //     }
-        //     roomTypeTable.draw();
-        // }
-    },
-});
-
-var updateBranches = new MultiSelectTag("update_branches", {
-    maxSelection: 5, // default unlimited.
-    required: true, // default false.
-    placeholder: "Chọn chi nhánh...", // default 'Search'.
-    onChange: function (selected) {
-        // Callback when selection changes.
-        console.log("Selection changed:", selected);
-        console.log(selected);
-        var selected_id = selected.map((item) => {
-            return item.id;
-        });
-        console.log(selected_id);
-        // if (selected) {
-        //     for (var item of findObject) {
-        //         roomTypeTable.column("8").search(item, { exact: true });
-        //     }
-        //     roomTypeTable.draw();
-        // }
-    },
-});
-
 // lọc status room type
 $(".radio-select input").each(function () {
     const item = $(this);
@@ -317,11 +287,8 @@ $(".radio-select input").each(function () {
 });
 
 // custom select bắt sự kiện lọc chi nhánh
-
-import { updateSelectedOptions } from "./custom mutiple select.js";
-
 document.addEventListener("DOMContentLoaded", function () {
-    const customSelect = document.querySelector(".custom-select");
+    const customSelect = document.querySelector("#filter-branch-select");
     customSelect.addEventListener("click", function (event) {
         let clickElement = event.target.closest(".option");
         if (clickElement) {
@@ -334,4 +301,3 @@ document.addEventListener("DOMContentLoaded", function () {
         roomTypeTable.column(8).search(sortBranch, true, false).draw();
     });
 });
-

@@ -56,15 +56,14 @@ class RoomTypeController extends Controller
         $branchIds = Branch::pluck('id');
 
         // Lấy input từ request (nếu là mảng thì xử lý mảng, nếu 1 id thì xử lý 1 id)
-        $inputBranchIds = $request->input('add_branches');
-
+        $inputBranchIds = $request->input('tags-list');
+        // ép kiểu sang int tất cả phần tử
+        $inputBranchIds = array_map('intval', explode(',', $inputBranchIds));
+      
         if (is_array($inputBranchIds)) {
-            // ép kiểu sang int tất cả phần tử
-            $inputBranchIds = collect($inputBranchIds)->map(fn($id) => (int) $id);
-
             // lọc các id hợp lệ
-            $validBranchIds = $inputBranchIds->filter(fn($id) => $branchIds->contains($id));
-
+            $validBranchIds = collect($inputBranchIds)->filter(fn($id) => $branchIds->contains($id));
+    
             if ($validBranchIds->isNotEmpty()) {
                 $newRoomTypeModel->branches()->attach($validBranchIds->toArray());
             }
@@ -126,8 +125,11 @@ class RoomTypeController extends Controller
         // Lấy danh sách branch id hợp lệ
         $branchIds = Branch::pluck('id');
 
-        // Lấy input từ request (nếu là mảng thì xử lý mảng, nếu 1 id thì xử lý 1 id)
-        $inputBranchIds = $request->input('update_branches');
+        // Lấy input từ request là string 
+        $inputBranchIds = $request->input('tags-list');
+
+        // ép kiểu sang int tất cả phần tử
+        $inputBranchIds = array_map('intval', explode(',', $inputBranchIds));
 
         if (is_array($inputBranchIds)) {
             // ép kiểu sang int tất cả phần tử
