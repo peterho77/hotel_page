@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('area', 20);
             $table->string('status', 50);
             $table->text('note');
-            $table->foreignId('branch_id')->constrained('branch')->onDelete('cascade');
+            $table->foreignId('branch_id')->nullable()->constrained('branch')->onDelete('cascade');
         });
     }
 

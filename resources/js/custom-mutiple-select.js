@@ -51,8 +51,6 @@ export function updateSelectedOptions(customSelect) {
     }
     customSelect.querySelector(".selected-options").innerHTML = tagsHTML;
 
-    console.log(selectedText);
-
     return selectedText;
 }
 

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RoomTypeController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\LanguageController;
 
 Route::get('/', function () {
@@ -20,8 +21,8 @@ Route::get('/home', function () {
 Route::prefix('admin')->group(function () {
     Route::singleton('', AdminController::class);
     Route::apiResource('room_type', RoomTypeController::class)->except('show');
-    Route::get('/room_type/show', [RoomTypeController::class, 'show'])->name('room_type.show');
-    Route::patch('/room_type/update_status/{room_type}', [RoomTypeController::class, 'update_status'])->name('room_type.update_status');
+    Route::apiResource('room', RoomController::class)->except('show');
+    Route::patch('/room_type/{room_type}/status', [RoomTypeController::class, 'status'])->name('room_type.status');
 });
 
 // Lang switch

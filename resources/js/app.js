@@ -10,6 +10,5 @@ import '../css/guest/base.css'
 import '../css/guest/style.scss'
 
 // js
-import './toggle-lang-switch.js'
 import './script.js'
 

@@ -13,15 +13,14 @@ class RoomTypeController extends Controller
      */
     public function index()
     {
-        //
-        if (session()->has('room_type_list')) {
-            $room_type_list = session('room_type_list');
-        } else {
-            // Nếu không có, lấy toàn bộ
-            $room_type_list = RoomType::all();
+        $roomTypeList = RoomType::all();
+        if ($roomTypeList->isNotEmpty()) {
+            $firstItem = $roomTypeList->first();
+            $columns = array_keys($firstItem->getAttributes());
+            $columns = array_diff($columns, ['id']);
         }
         $branches = Branch::all();
-        return view('pages.admin.room_type', ["room_type_list" => $room_type_list, "branches" => $branches]);
+        return view('pages.admin.room_management', ["roomTypeList" => $roomTypeList, "columns" => $columns, "branches" => $branches, "activeTab" => "roomType"]);
     }
 
     /**
@@ -59,11 +58,11 @@ class RoomTypeController extends Controller
         $inputBranchIds = $request->input('tags-list');
         // ép kiểu sang int tất cả phần tử
         $inputBranchIds = array_map('intval', explode(',', $inputBranchIds));
-      
+
         if (is_array($inputBranchIds)) {
             // lọc các id hợp lệ
             $validBranchIds = collect($inputBranchIds)->filter(fn($id) => $branchIds->contains($id));
-    
+
             if ($validBranchIds->isNotEmpty()) {
                 $newRoomTypeModel->branches()->attach($validBranchIds->toArray());
             }
@@ -75,31 +74,6 @@ class RoomTypeController extends Controller
         }
 
         return redirect()->route('room_type.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Request $request)
-    {
-        // lấy array id của các chi nhánh
-        session(['filter_branches' => $request->input('filter_branches')]);
-        $selectedIds = $request->input('filter_branches');
-        $branches = Branch::whereIn('id', $selectedIds)->get();
-
-        //lấy tên của các hạng phòng thuộc chi nhánh lọc thành array không trùng lặp
-        $room_type_names = [];
-        foreach ($branches as $branch) {
-            foreach ($branch->room_types->pluck('name') as $room_type_name) {
-                $room_type_names[] = $room_type_name;
-            }
-        }
-        $room_type_names = array_unique($room_type_names);
-
-        // lấy được collection danh sách các hạng phòng
-        $room_type_list = RoomType::whereIn('name', $room_type_names)->get();
-
-        return redirect()->route('room_type.index')->with('room_type_list', $room_type_list);
     }
 
     /**
@@ -118,8 +92,8 @@ class RoomTypeController extends Controller
             'status' => 'required|max:50',
         ]);
 
-        $room_type = RoomType::find($id);
-        $room_type->update($validated);
+        $roomType = RoomType::find($id);
+        $roomType->update($validated);
 
         // update các chi nhánh nếu có thay đổi
         // Lấy danh sách branch id hợp lệ
@@ -136,21 +110,21 @@ class RoomTypeController extends Controller
             $inputBranchIds = collect($inputBranchIds)->map(fn($id) => (int) $id);
 
             // lọc các id hợp lệ
-            $validBranchIds = $inputBranchIds->filter(fn($id) => $branchIds ->contains($id));
+            $validBranchIds = $inputBranchIds->filter(fn($id) => $branchIds->contains($id));
 
             if ($validBranchIds->isNotEmpty()) {
-                $room_type->branches()->sync($validBranchIds->toArray());
+                $roomType->branches()->sync($validBranchIds->toArray());
             }
         } else {
             $branchId = (int)$inputBranchIds;
             if ($branchIds->contains($branchId)) {
-                $room_type->branches()->sync($branchId);
+                $roomType->branches()->sync($branchId);
             }
         }
         return redirect()->route('room_type.index');
     }
 
-    public function update_status(string $id)
+    public function status(string $id)
     {
         $roomType = RoomType::find($id);
 
@@ -171,8 +145,8 @@ class RoomTypeController extends Controller
     public function destroy(string $id)
     {
         //
-        $room_type = RoomType::where('id', $id)->first();
-        $room_type->delete();
+        $roomType = RoomType::where('id', $id)->first();
+        $roomType->delete();
         return redirect()->route('room_type.index');
     }
 }
