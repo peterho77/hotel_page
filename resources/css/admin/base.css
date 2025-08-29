@@ -695,7 +695,7 @@ table.dataTable > thead {
     gap: var(--size-100);
 }
 
-.nav .nav-item button {
+.nav-pills .nav-link{
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     color: var(--neutral-color-800);

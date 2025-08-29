@@ -4,7 +4,7 @@
             <div class="main-content">
                 <section class="main-content__left">
                     <div class="side-bar">
-                        <div class="room-search search-input | box | flow" style="--flow-spacer:1em">
+                        <div class="search-bar | box | flow" style="--flow-spacer:1em">
                             <label class="label" for="room-type-search">Tìm kiếm</label>
                             <input type="text" name="room-type-search" placeholder="Tìm kiếm hạng phòng">
                         </div>
@@ -15,7 +15,7 @@
                                 placeholder="Chọn chi nhánh" />
                         </div>
 
-                        <form class="room-status | box | flow" style="--flow-spacer:1em">
+                        <form class="filter-status | box | flow" style="--flow-spacer:1em">
                             <label class="label" for="room-status">Trạng thái</label>
                             <div class="radio-select | form-check">
                                 <input class="form-check-input" type="radio" name="filter-status" value="active"

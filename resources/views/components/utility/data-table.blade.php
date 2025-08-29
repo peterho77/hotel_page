@@ -1,6 +1,6 @@
 @props(['id', 'list', 'columns'])
 
-<table id="{{ $id }}" class="hover row-border">
+<table id="{{ $id }}" class="data-table | hover row-border">
     <thead>
         <tr>
             {{-- Cột đầu để mở thông tin chi tiết từng dòng --}}
