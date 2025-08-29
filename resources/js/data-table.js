@@ -190,43 +190,10 @@ function bindDetailRowToTables(dataTables) {
     });
 }
 
-function bindFilterStatusToTables(filterSelector, dataTables) {
-    $(filterSelector).each(function () {
-        const item = $(this);
-        item.off("change").on("change", function () {
-            if (item.val() == "active") {
-                dataTables.forEach(table => {
-                    let status = findColumnIndexByName(".data-table", "status");
-                    table
-                    .column(status)
-                    .search(item.next().text().trim(), { exact: true })
-                    .draw();
-                })
-            } else if (item.val() == "inactive") {
-                dataTables.forEach(table => {
-                    let status = findColumnIndexByName(".data-table", "status");
-                    table
-                    .column(status)
-                    .search(item.next().text().trim(), { exact: true })
-                    .draw();
-                })
-            } else {
-                dataTables.forEach(table => {
-                    let status = findColumnIndexByName(".data-table", "status");
-                    table
-                    .column(status)
-                    .search("")
-                    .draw();
-                })
-            }
-        });
-    });
-}
-
 function findColumnIndexByName(tableSelector, columnName) {
     let columnIndex = -1;
 
-    $(`${tableSelector} thead th`).each(function (index) {
+    $(tableSelector).find("thead th").each(function (index) {
         if ($(this).text().trim().toLowerCase() === columnName.toLowerCase()) {
             columnIndex = index;
         }
@@ -235,11 +202,41 @@ function findColumnIndexByName(tableSelector, columnName) {
     return columnIndex;
 }
 
+function bindFilterStatusToTables(filterSelector, dataTables) {
+    $(filterSelector).each(function () {
+        const item = $(this);
+
+        item.off("change").on("change", function () {
+            const selectedValue = item.val();
+            const filterText = item.next().text().trim(); // Hoặc dùng data-value nếu có
+
+            dataTables.forEach((table) => {
+                const statusColumnIndex = findColumnIndexByName(
+                    table.table().node(),
+                    "status"
+                );
+
+                if (
+                    selectedValue === "active" ||
+                    selectedValue === "inactive"
+                ) {
+                    table
+                        .column(statusColumnIndex)
+                        .search(filterText, { exact: true })
+                        .draw();
+                } else {
+                    table.column(statusColumnIndex).search("").draw();
+                }
+            });
+        });
+    });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
-    let bladeColumns = window.roomTypeColumns || [];
+    let bladeColumns = window.tableColumns || [];
     let columnKeys = Object.values(bladeColumns);
     let dynamicColumns = columnKeys.map((key) => ({ data: key }));
-    console.log(bladeColumns);
+    
     // Thêm nút mở rộng ở cột đầu
     dynamicColumns.unshift({
         className: "dt-control",
@@ -287,13 +284,6 @@ document.addEventListener("DOMContentLoaded", function () {
         order: [[1, "asc"]],
     });
 
-    // Ví dụ dùng:
-    // const index = findColumnIndexByName(roomTable, "status");
-    // console.log("Index status:", index);
-
-    const tableId = roomTable;
-    console.log(tableId); // 👉 "myTable"
-
     // ẩn thanh tìm kiếm mặc định của data table
     $(".dt-search").hide();
 
@@ -315,24 +305,27 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // lọc trạng thái hoạt động
-    bindFilterStatusToTables(".filter-status .radio-select input", [roomTable, roomTypeTable]);
+    bindFilterStatusToTables(".filter-status .radio-select input", [
+        roomTable,
+        roomTypeTable,
+    ]);
 
-    $(".filter-status .radio-select input").each(function () {
-        const item = $(this);
-        item.off("change").on("change", function () {
-            if (item.val() == "active") {
-                roomTypeTable
-                    .column("7")
-                    .search(item.next().text().trim(), { exact: true })
-                    .draw();
-            } else if (item.val() == "inactive") {
-                roomTypeTable
-                    .column("7")
-                    .search(item.next().text().trim(), { exact: true })
-                    .draw();
-            } else {
-                roomTypeTable.column("7").search("").draw();
-            }
-        });
-    });
+    // $(".filter-status .radio-select input").each(function () {
+    //     const item = $(this);
+    //     item.off("change").on("change", function () {
+    //         if (item.val() == "active") {
+    //             roomTypeTable
+    //                 .column("7")
+    //                 .search(item.next().text().trim(), { exact: true })
+    //                 .draw();
+    //         } else if (item.val() == "inactive") {
+    //             roomTypeTable
+    //                 .column("7")
+    //                 .search(item.next().text().trim(), { exact: true })
+    //                 .draw();
+    //         } else {
+    //             roomTypeTable.column("7").search("").draw();
+    //         }
+    //     });
+    // });
 });

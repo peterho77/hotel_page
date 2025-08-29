@@ -157,6 +157,8 @@
 
     &__right{
         flex: 1;
+        background: var(--neutral-color-100);
+        padding: 1em;
 
         .tab-content{
             padding: 1em;

@@ -3,7 +3,7 @@
         <div class="custom-container">
             <div class="main-content">
                 <section class="main-content__left">
-                    <div class="side-bar">
+                    <div class="side-bar | flow" style="--flow-spacer:1em">
                         <div class="search-bar | box | flow" style="--flow-spacer:1em">
                             <label class="label" for="room-type-search">Tìm kiếm</label>
                             <input type="text" name="room-type-search" placeholder="Tìm kiếm hạng phòng">
@@ -52,13 +52,13 @@
                     </div>
                 </section>
                 <section class="main-content__right | flow" style="--flow-spacer:1em">
-                    <nav class="filter-options">
+                    <nav class="table-toolbar">
                         <div class="nav-wrapper">
                             <div class="filter-search">
                                 <span class="label | fs-normal-heading">Hạng phòng & Phòng</span>
                                 {{-- code thêm nút search --}}
                             </div>
-                            <div class="filter-buttons">
+                            <div class="table-toolbar-buttons">
                                 <button class="button success-button add-new-button">
                                     <svg class="icon" data-size="small">
                                         <use xlink:href="{{asset('icon/admin/filter-buttons.svg#plus')}}">
@@ -80,14 +80,16 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <svg class="icon" data-size="small">
-                                                <use xlink:href="{{asset('icon/admin/filter-buttons.svg#plus')}}">
-                                                </use>
-                                            </svg>
-                                            Phòng
+                                            <a href="" data-bs-toggle="modal" data-bs-target="#add-new-room">
+                                                <svg class="icon" data-size="small">
+                                                    <use xlink:href="{{asset('icon/admin/filter-buttons.svg#plus')}}">
+                                                    </use>
+                                                </svg>
+                                                Phòng
+                                            </a>
                                         </li>
                                     </ul>
-                                </button>
+                                </button>   
                                 {{-- modal add new room type --}}
                                 <div class="modal fade" id="add-new-room-type" tabindex="-1"
                                     aria-labelledby="add_new-room-type" aria-hidden="true">
@@ -558,5 +560,5 @@
 </x-admin-layout>
 
 <script>
-    window.roomTypeColumns = @json($columns);
+    window.tableColumns = @json($columns);
 </script>
