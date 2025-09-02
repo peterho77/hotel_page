@@ -235,78 +235,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button class="button success-button toggle-columns-button">
-                                    <div>
-                                        <svg class="icon">
-                                            <use xlink:href="{{asset('icon/admin/filter-buttons.svg#list')}}">
-                                            </use>
-                                        </svg>
-                                        <svg class="icon" data-size="small">
-                                            <use
-                                                xlink:href="{{asset('icon/guest/caret-down-fill.svg#caret-down-fill')}}">
-                                            </use>
-                                        </svg>
-                                    </div>
-                                    <ul class="toggle-columns-list">
-                                        <li class="toggle-visible-column | form-check">
-                                            <input class="form-check-input" type="checkbox" name="name" data-column="1"
-                                                id="name" checked>
-                                            <label class="form-check-label" for="name">
-                                                Tên hạng phòng
-                                            </label>
-                                        </li>
-                                        <li class="toggle-visible-column | form-check">
-                                            <input class="form-check-input" type="checkbox" name="quantity"
-                                                data-column="3" id="quantity" checked>
-                                            <label class="form-check-label" for="quantity">
-                                                Số lượng phòng
-                                            </label>
-                                        </li>
-                                        <li class="toggle-visible-column | form-check">
-                                            <input class="form-check-input" type="checkbox" name="hourly_rate"
-                                                data-column="4" id="hourly_rate" checked>
-                                            <label class="form-check-label" for="hourly_rate">
-                                                Giá giờ
-                                            </label>
-
-                                        </li>
-                                        <li class="toggle-visible-column | form-check">
-                                            <input class="form-check-input" type="checkbox" name="full_day_rate"
-                                                data-column="5" id="full_day_rate" checked>
-                                            <label class="form-check-label" for="full_day_rate">
-                                                Giá cả ngày
-                                            </label>
-                                        </li>
-                                        <li class="toggle-visible-column | form-check">
-                                            <input class="form-check-input" type="checkbox" name="overnight_rate"
-                                                data-column="6" id="overnight_rate" checked>
-                                            <label class="form-check-label" for="overnight_rate">
-                                                Giá qua đêm
-                                            </label>
-                                        </li>
-                                        <li class="toggle-visible-column | form-check">
-                                            <input class="form-check-input" type="checkbox" name="status"
-                                                data-column="7" id="status" checked>
-                                            <label class="form-check-label" for="status">
-                                                Trạng thái
-                                            </label>
-                                        </li>
-                                        <li class="toggle-visible-column | form-check">
-                                            <input class="form-check-input" type="checkbox" name="branch"
-                                                data-column="8" id="branch" checked>
-                                            <label class="form-check-label" for="branch">
-                                                Chi nhánh
-                                            </label>
-                                        </li>
-                                        <li class="toggle-visible-column | form-check">
-                                            <input class="form-check-input" type="checkbox" name="img" data-column=""
-                                                id="img" checked>
-                                            <label class="form-check-label" for="img">
-                                                Hình ảnh
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </button>
+                                <x-utility.toggle-column-button :columns="$columns"/>
                             </div>
                         </div>
                     </nav>

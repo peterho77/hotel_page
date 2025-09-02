@@ -232,6 +232,21 @@ function bindFilterStatusToTables(filterSelector, dataTables) {
     });
 }
 
+function bindToggleColumnToTables(dataTables){
+    document.querySelectorAll(".toggle-visible-column").forEach((el) => {
+        el.addEventListener("click", function (e) {
+            let columnIdx = e.target.getAttribute("data-column");
+            dataTables.forEach((table) => {
+                let column = table.column(columnIdx);
+                
+                // Toggle the visibility
+                column.visible(!column.visible());
+            })
+
+        });
+    });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     let bladeColumns = window.tableColumns || [];
     let columnKeys = Object.values(bladeColumns);
@@ -294,15 +309,7 @@ document.addEventListener("DOMContentLoaded", function () {
     bindDetailRowToTables([roomTypeTable, roomTable]);
 
     // ẩn hiện cột
-    document.querySelectorAll(".toggle-visible-column").forEach((el) => {
-        el.addEventListener("click", function (e) {
-            let columnIdx = e.target.getAttribute("data-column");
-            let column = roomTypeTable.column(columnIdx);
-
-            // Toggle the visibility
-            column.visible(!column.visible());
-        });
-    });
+    bindToggleColumnToTables([roomTypeTable, roomTable]);
 
     // lọc trạng thái hoạt động
     bindFilterStatusToTables(".filter-status .radio-select input", [
@@ -310,22 +317,4 @@ document.addEventListener("DOMContentLoaded", function () {
         roomTypeTable,
     ]);
 
-    // $(".filter-status .radio-select input").each(function () {
-    //     const item = $(this);
-    //     item.off("change").on("change", function () {
-    //         if (item.val() == "active") {
-    //             roomTypeTable
-    //                 .column("7")
-    //                 .search(item.next().text().trim(), { exact: true })
-    //                 .draw();
-    //         } else if (item.val() == "inactive") {
-    //             roomTypeTable
-    //                 .column("7")
-    //                 .search(item.next().text().trim(), { exact: true })
-    //                 .draw();
-    //         } else {
-    //             roomTypeTable.column("7").search("").draw();
-    //         }
-    //     });
-    // });
 });
