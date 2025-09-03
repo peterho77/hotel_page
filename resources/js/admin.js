@@ -15,7 +15,6 @@ import "../css/admin/style.scss";
 // custom js
 import "./data-table.js";
 import "./custom-mutiple-select.js";
-import { updateSelectedOptions } from "./custom-mutiple-select.js";
 import "./script.js";
 
 // toggle columns button
@@ -35,18 +34,6 @@ document.addEventListener("click", function (event) {
     }
 });
 
-// custom select bắt sự kiện lọc chi nhánh
-document.addEventListener("DOMContentLoaded", function () {
-    const customSelect = document.querySelector("#filter-branch-select");
-    customSelect.addEventListener("click", function (event) {
-        let clickElement = event.target.closest(".option");
-        if (clickElement) {
-            let sortBranch = updateSelectedOptions(customSelect).join("|");
-            roomTypeTable.column(8).search(sortBranch, true, false).draw();
-        }
-    });
-    customSelect.addEventListener("removeTagDone", function (event) {
-        let sortBranch = updateSelectedOptions(customSelect).join("|");
-        roomTypeTable.column(8).search(sortBranch, true, false).draw();
-    });
-});
+
+
+

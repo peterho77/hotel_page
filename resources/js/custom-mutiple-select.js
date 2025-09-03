@@ -107,6 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             updateSelectedOptions(customSelect);
 
+            // tạo sự kiện mới là remove tag done
             customSelect.dispatchEvent(new CustomEvent("removeTagDone"));
         }
     });

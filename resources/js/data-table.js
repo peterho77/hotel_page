@@ -1,4 +1,5 @@
 // data table jquery
+import { updateSelectedOptions } from "./custom-mutiple-select.js";
 import DataTable from "datatables.net-dt";
 import $ from "jquery";
 
@@ -193,11 +194,15 @@ function bindDetailRowToTables(dataTables) {
 function findColumnIndexByName(tableSelector, columnName) {
     let columnIndex = -1;
 
-    $(tableSelector).find("thead th").each(function (index) {
-        if ($(this).text().trim().toLowerCase() === columnName.toLowerCase()) {
-            columnIndex = index;
-        }
-    });
+    $(tableSelector)
+        .find("thead th")
+        .each(function (index) {
+            if (
+                $(this).text().trim().toLowerCase() === columnName.toLowerCase()
+            ) {
+                columnIndex = index;
+            }
+        });
 
     return columnIndex;
 }
@@ -232,17 +237,51 @@ function bindFilterStatusToTables(filterSelector, dataTables) {
     });
 }
 
-function bindToggleColumnToTables(dataTables){
+function bindFilterBranchToTables(filterSelector, dataTables) {
+    $(filterSelector).on("click", function (event) {
+        let clickElement = event.target.closest(".option");
+        if (clickElement) {
+            let sortBranch = updateSelectedOptions(document.querySelector(filterSelector)).join("|");
+            dataTables.forEach((table) => {
+                const branchColumnIndex = findColumnIndexByName(
+                    table.table().node(),
+                    "branch"
+                );
+
+                table
+                    .column(branchColumnIndex)
+                    .search(sortBranch, true, false)
+                    .draw();
+            });
+        }
+    });
+
+    $(filterSelector).on("removeTagDone", function () {
+        let sortBranch = updateSelectedOptions(document.querySelector(filterSelector)).join("|");
+        dataTables.forEach((table) => {
+            const branchColumnIndex = findColumnIndexByName(
+                table.table().node(),
+                "branch"
+            );
+
+            table
+                .column(branchColumnIndex)
+                .search(sortBranch, true, false)
+                .draw();
+        });
+    });
+}
+
+function bindToggleColumnToTables(dataTables) {
     document.querySelectorAll(".toggle-visible-column").forEach((el) => {
         el.addEventListener("click", function (e) {
             let columnIdx = e.target.getAttribute("data-column");
             dataTables.forEach((table) => {
                 let column = table.column(columnIdx);
-                
+
                 // Toggle the visibility
                 column.visible(!column.visible());
-            })
-
+            });
         });
     });
 }
@@ -251,7 +290,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let bladeColumns = window.tableColumns || [];
     let columnKeys = Object.values(bladeColumns);
     let dynamicColumns = columnKeys.map((key) => ({ data: key }));
-    
+
     // Thêm nút mở rộng ở cột đầu
     dynamicColumns.unshift({
         className: "dt-control",
@@ -317,4 +356,11 @@ document.addEventListener("DOMContentLoaded", function () {
         roomTypeTable,
     ]);
 
+    // lọc chi nhánh bảng
+    bindFilterBranchToTables("#filter-branch-select", [
+        roomTable,
+        roomTypeTable,
+    ]);
+
+    console.log(findColumnIndexByName(roomTypeTable.table().node(), "branch"));
 });
