@@ -59,7 +59,7 @@
                                 {{-- code thêm nút search --}}
                             </div>
                             <div class="table-toolbar-buttons">
-                                <x-utility.button.add-new-button :tagList="$branches" />
+                                <x-utility.button.add-new-button :newList="['room', 'room_type']" :tagList="$branches" />
                                 <x-utility.button.toggle-column-button :$columns />
                             </div>
                         </div>
