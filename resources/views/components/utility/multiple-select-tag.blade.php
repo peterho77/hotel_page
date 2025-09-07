@@ -1,8 +1,8 @@
-@props(['id' => '','list', 'placeholder'])
+@props(['id' => '', 'list', 'name' => 'tags-list', 'placeholder'])
 
 <div id="{{$id}}" class="custom-select">
     <div class="select-box">
-        <input type="text" class="tags-input" name="tags-list" hidden />
+        <input type="text" class="tags-input" name="{{ $name }}" hidden />
         <div class="selected-area">
             <span class="placeholder">{{ $placeholder }}</span>
             <div class="selected-options">

@@ -19,8 +19,8 @@ class RoomTypeController extends Controller
             $columns = array_keys($firstItem->getAttributes());
             $columns = array_diff($columns, ['id']);
         }
-        $branches = Branch::all();
-        return view('pages.admin.room_management', ["roomTypeList" => $roomTypeList, "columns" => $columns, "branches" => $branches, "activeTab" => "roomType"]);
+        $branchList = Branch::all();
+        return view('pages.admin.room_management', ["roomTypeList" => $roomTypeList, "columns" => $columns, "branchList" => $branchList, "activeTab" => "roomType"]);
     }
 
     /**
@@ -55,7 +55,7 @@ class RoomTypeController extends Controller
         $branchIds = Branch::pluck('id');
 
         // Lấy input từ request (nếu là mảng thì xử lý mảng, nếu 1 id thì xử lý 1 id)
-        $inputBranchIds = $request->input('tags-list');
+        $inputBranchIds = $request->input('branch_id');
         // ép kiểu sang int tất cả phần tử
         $inputBranchIds = array_map('intval', explode(',', $inputBranchIds));
 

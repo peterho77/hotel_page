@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Room;
+use App\Models\RoomType;
 use App\Models\Branch;
 use Illuminate\Http\Request;
 
@@ -18,10 +19,11 @@ class RoomController extends Controller
         if ($roomList->isNotEmpty()) {
             $firstItem = $roomList->first();
             $columns = array_keys($firstItem->getAttributes());
-            $columns = array_diff($columns, ['id','branch_id']);
+            $columns = array_diff($columns, ['id', 'branch_id']);
         };
-        $branches = Branch::all();
-        return view('pages.admin.room_management', ["roomList" => $roomList, "columns" => $columns, "branches" => $branches, "activeTab" => "room"]);
+        $roomTypeList = RoomType::all();
+        $branchList = Branch::all();
+        return view('pages.admin.room_management', ["roomList" => $roomList, "columns" => $columns, "branchList" => $branchList, "roomTypeList" => $roomTypeList, "activeTab" => "room"]);
     }
 
     /**
@@ -41,16 +43,22 @@ class RoomController extends Controller
             'name' => 'required',
             'area' => 'required',
             'status' => 'required|max:50',
+            'room_type_id' => 'required',
+            'branch_id' => 'required'
         ]);
 
         $newRoom = [
             'name' => $request->name,
             'area' => $request->area,
-            'status' => $request->status
+            'status' => $request->status,
+            'note' => $request->note,
+            'room_type_id' => $request->room_type_id,
+            'branch_id' => $request->branch_id
         ];
 
-        $newRoomModel = Room::create($newRoom);
+        Room::create($newRoom);
 
+        return redirect()->route('room.index');
     }
 
     /**

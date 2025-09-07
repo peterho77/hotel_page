@@ -9,6 +9,7 @@ class Room extends Model
 {
     //
     protected $table = "room";
+    public $timestamps = false;
 
     public function room_type(): BelongsTo
     {
@@ -23,4 +24,6 @@ class Room extends Model
             'name' => 'Chưa có chi nhánh',
         ]);
     }
+
+    protected $fillable = ['name', 'area', 'status', 'note', 'branch_id', 'room_type_id'];
 }

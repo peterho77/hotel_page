@@ -29,5 +29,5 @@
         $modalColumns = Illuminate\Support\Facades\Schema::getColumnListing($newItem);
     @endphp
     <x-utility.modal.add-new-modal :id="'add-new-' . $newItem" :item="$newItem" :columns="$modalColumns"
-        :tagList="$attributes->get('tagList')" />
+        :branchList="$attributes->get('branchList')" :selectList="$attributes->get('selectList')"/>
 @endforeach

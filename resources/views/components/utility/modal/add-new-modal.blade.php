@@ -1,4 +1,4 @@
-@props(['id', 'item', 'columns', 'tagList'])
+@props(['id', 'item', 'columns', 'branchList'])
 
 {{-- modal add new  --}}
 <div class="modal fade" id="{{ $id }}" tabindex="-1" aria-labelledby="{{ $id . '-label' }}" aria-hidden="true">
@@ -13,48 +13,55 @@
                 <form method="POST" action="{{ route($item . '.store') }}" id="{{ $id . '-form' }}">
                     @csrf
                     @foreach($columns as $column)
-                        @continue(in_array($column, ['status', 'branch']))
+                        @continue(in_array($column, ['branch','id']))
                         @continue(Str::endsWith($column, '_id'))
 
                         @php
-                            $type = Illuminate\Support\Facades\Schema::getColumnType($item, $column);
+                            $type = Schema::getColumnType($item, $column);
                         @endphp
 
-                        <div class="mb-3 row">
-                            <label for="{{ $column }}"
-                                class="col-sm-2 col-md-3 col-lg-4 col-form-label">{{ ucwords(str_replace('_', ' ', $column)) }}</label>
-                            <div class="col-sm-10 col-sm-9 col-lg-8">
-                                @if(in_array($type, ['integer','bigint','decimal','float','double']))
-                                    <input type="number" name="{{ $column }}" class="form-control">
-                                @else
-                                    <input type="text" name="{{ $column }}" class="form-control">
-                                @endif
+                        @if ($column == "status")
+                            <div class="mb-3 row">
+                                <label for="status" class="col-sm-2 col-md-3 col-lg-4 col-form-label">
+                                    Trạng thái</label>
+                                <div class="col-sm-10 col-sm-9 col-lg-8">
+                                    <select class="form-select" name="status">
+                                        <option value="Đang kinh doanh">
+                                            Đang kinh doanh
+                                        </option>
+                                        <option value="Ngừng kinh doanh">
+                                            Ngừng kinh doanh
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
+                        @else
+                            <div class="mb-3 row">
+                                <label for="{{ $column }}"
+                                    class="col-sm-2 col-md-3 col-lg-4 col-form-label">{{ ucwords(str_replace('_', ' ', $column)) }}</label>
+                                <div class="col-sm-10 col-sm-9 col-lg-8">
+                                    @if(in_array($type, ['integer', 'bigint', 'decimal', 'float', 'double']))
+                                        <input type="number" name="{{ $column }}" class="form-control">
+                                    @else
+                                        <input type="text" name="{{ $column }}" class="form-control">
+                                    @endif
+                                </div>
+                            </div>
+                        @endif
                     @endforeach
-                    <div class="mb-3 row">
-                        <label for="status" class="col-sm-2 col-md-3 col-lg-4 col-form-label">
-                            Trạng thái</label>
-                        <div class="col-sm-10 col-sm-9 col-lg-8">
-                            <select class="form-select" name="status">
-                                <option value="Đang kinh doanh">
-                                    Đang kinh doanh
-                                </option>
-                                <option value="Ngừng kinh doanh">
-                                    Ngừng kinh doanh
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                    @isset($tagList)
+
+                    @if ($item == "room")
+                        <x-utility.single-select-tag label="Room Type" name="room_type_id" :list="$attributes->get('selectList')"/>
+                        <x-utility.single-select-tag label="Branch" name="branch_id" :list="$branchList"/>
+                    @elseif ($item == "room_type")
                         <div class="mb-3 row">
                             <label for="add_branches" class="col-sm-2 col-md-3 col-lg-4 col-form-label">
-                                Chi nhánh</label>
+                                Branch</label>
                             <div class="col-sm-10 col-sm-9 col-lg-8">
-                                <x-utility.multiple-select-tag :list="$tagList" placeholder="Chọn chi nhánh..." />
+                                <x-utility.multiple-select-tag :list="$branchList" name="branch_id" placeholder="Chọn chi nhánh..." />
                             </div>
                         </div>
-                    @endisset
+                    @endif
 
                     {{-- code sau --}}
                     {{-- <div class="box form-box | mb-3">

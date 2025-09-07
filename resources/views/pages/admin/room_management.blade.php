@@ -11,7 +11,7 @@
 
                         {{-- custom mutiple select tag --}}
                         <div class="box">
-                            <x-utility.multiple-select-tag id="filter-branch-select" :list="$branches"
+                            <x-utility.multiple-select-tag id="filter-branch-select" :list="$branchList"
                                 placeholder="Chọn chi nhánh" />
                         </div>
 
@@ -59,7 +59,7 @@
                                 {{-- code thêm nút search --}}
                             </div>
                             <div class="table-toolbar-buttons">
-                                <x-utility.button.add-new-button :newList="['room', 'room_type']" :tagList="$branches" />
+                                <x-utility.button.add-new-button :newList="['room', 'room_type']" :branchList="$branchList" :selectList="$roomTypeList"/>
                                 <x-utility.button.toggle-column-button :$columns />
                             </div>
                         </div>
@@ -98,7 +98,7 @@
             </div>
 
             <div class="modals">
-                <x-utility.modal.update-modal :tagList="$branches" />
+                <x-utility.modal.update-modal :tagList="$branchList" />
     
                 <x-utility.modal.update-status-modal />
     
