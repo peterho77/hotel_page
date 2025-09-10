@@ -69,8 +69,8 @@
                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <a href="{{ route('room_type.index') }}"
-                                class="nav-link {{ $activeTab === 'roomType' ? 'active' : '' }}" role="tab"
-                                aria-selected="{{ $activeTab === 'roomType' ? 'true' : 'false' }}">
+                                class="nav-link {{ $activeTab === 'room_type' ? 'active' : '' }}" role="tab"
+                                aria-selected="{{ $activeTab === 'room_type' ? 'true' : 'false' }}">
                                 Hạng phòng
                             </a>
                         </li>
@@ -84,7 +84,7 @@
                     </ul>
 
                     <div class="tab-content" id="nav-tabContent">
-                        @if ($activeTab === 'roomType')
+                        @if ($activeTab === 'room_type')
                             <div class="tab-pane fade show active" id="nav-room-type" role="tabpanel">
                                 <x-utility.data-table id="room-type" :list="$roomTypeList" :$columns />
                             </div>
@@ -98,11 +98,9 @@
             </div>
 
             <div class="modals">
-                <x-utility.modal.update-modal :tagList="$branchList" />
-    
+                <x-utility.modal.update-modal :item="$activeTab" :$columns :branchList="$branchList" :selectList="$roomTypeList"/>       
                 <x-utility.modal.update-status-modal />
-    
-                <x-utility.modal.delete-modal />
+                <x-utility.modal.delete-modal :item="$activeTab" />
             </div>
         </div>
     </main>
@@ -110,4 +108,5 @@
 
 <script>
     window.tableColumns = @json($columns);
+    window.activeTab = @json($activeTab);
 </script>

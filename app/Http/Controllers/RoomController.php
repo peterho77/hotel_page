@@ -80,16 +80,29 @@ class RoomController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Room $room)
+    public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+            'area' => 'required',
+            'status' => 'required|max:50',
+            'room_type_id' => 'required',
+            'branch_id' => 'required'
+        ]);
+
+        $room = Room::find($id);
+        $room->update($validated);
+        return redirect()->route('room.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Room $room)
+    public function destroy(string $id)
     {
         //
+        $room = Room::where('id', $id)->first();
+        $room->delete();
+        return redirect()->route('room.index');
     }
 }

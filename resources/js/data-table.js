@@ -48,21 +48,21 @@ function format(d, id) {
     }
     let updateBtn = `
             <div class="update-buttons">
-                <button class="button success-button" data-id="${id}" data-bs-toggle="modal" data-bs-target="#update-room-type">
+                <button class="button success-button" data-id="${id}" data-bs-toggle="modal" data-bs-target="#update-item-modal">
                     <svg class="icon" data-size="small" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M530.8 134.1C545.1 144.5 548.3 164.5 537.9 178.8L281.9 530.8C276.4 538.4 267.9 543.1 258.5 543.9C249.1 544.7 240 541.2 233.4 534.6L105.4 406.6C92.9 394.1 92.9 373.8 105.4 361.3C117.9 348.8 138.2 348.8 150.7 361.3L252.2 462.8L486.2 141.1C496.6 126.8 516.6 123.6 530.9 134z"/></svg>
                     <span>Cập nhật</span>
                 </button>
                 ${
                     d.status === "Đang kinh doanh"
                         ? `
-                    <button class="button danger-button" data-id="${id}" data-bs-toggle="modal" data-bs-target="#update-room-type-status">
+                    <button class="button danger-button" data-id="${id}" data-bs-toggle="modal" data-bs-target="#update-status-modal">
                         <svg class="icon" data-size="small" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M256 160L256 224L384 224L384 160C384 124.7 355.3 96 320 96C284.7 96 256 124.7 256 160zM192 224L192 160C192 89.3 249.3 32 320 32C390.7 32 448 89.3 448 160L448 224C483.3 224 512 252.7 512 288L512 512C512 547.3 483.3 576 448 576L192 576C156.7 576 128 547.3 128 512L128 288C128 252.7 156.7 224 192 224z"/></svg>
                         <span>Ngừng kinh doanh</span>
                     </button>
                 `
                         : ""
                 }
-                <button class="button danger-button" data-id="${id}" data-bs-toggle="modal" data-bs-target="#delete-room-type">
+                <button class="button danger-button" data-id="${id}" data-bs-toggle="modal" data-bs-target="#delete-item-modal">
                     <svg class="icon" data-size="small" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M232.7 69.9L224 96L128 96C110.3 96 96 110.3 96 128C96 145.7 110.3 160 128 160L512 160C529.7 160 544 145.7 544 128C544 110.3 529.7 96 512 96L416 96L407.3 69.9C402.9 56.8 390.7 48 376.9 48L263.1 48C249.3 48 237.1 56.8 232.7 69.9zM512 208L128 208L149.1 531.1C150.7 556.4 171.7 576 197 576L443 576C468.3 576 489.3 556.4 490.9 531.1L512 208z"/></svg>
                     <span>Xóa</span>
                 </button>
@@ -75,6 +75,9 @@ function format(d, id) {
 
 function bindDetailRowToTables(dataTables) {
     dataTables.forEach((table) => {
+        let columns = window.tableColumns || [];
+        let activeTab = window.activeTab;
+
         table.on("click", "tbody tr td.dt-control", function (e) {
             let tr = e.target.closest("tr");
             let activeBtn = $(tr).find(".dt-control button");
@@ -94,7 +97,6 @@ function bindDetailRowToTables(dataTables) {
             } else {
                 // Open this row
                 row.child(format(row.data(), id)).show();
-                console.log(row.data());
                 activeBtn.fadeOut(100, function () {
                     activeBtn
                         .first()
@@ -107,51 +109,84 @@ function bindDetailRowToTables(dataTables) {
                     "click",
                     ".update-buttons button:first-child",
                     function () {
-                        $('#update-room-type form input[name="name"]').val(
-                            row.data().name
-                        );
-                        $(
-                            '#update-room-type form textarea[name="description"]'
-                        ).val(row.data().description);
-                        $('#update-room-type form input[name="quantity"]').val(
-                            parseInt(row.data().quantity)
-                        );
-                        $(
-                            '#update-room-type form input[name="hourly_rate"]'
-                        ).val(parseInt(row.data().hourly_rate));
-                        $(
-                            '#update-room-type form input[name="full_day_rate"]'
-                        ).val(parseInt(row.data().full_day_rate));
-                        $(
-                            '#update-room-type form input[name="overnight_rate"]'
-                        ).val(row.data().overnight_rate);
-                        $('#update-room-type form select[name="status"]').val(
-                            row.data().status
-                        );
+                        $.each(columns, function (key, column) {
+                            let value = row.data()[column];
 
-                        let hasMatch = false;
-                        $(
-                            "#update-branches.custom-select .options .option"
-                        ).each((index, element) => {
-                            let optionText = $(element).text().trim();
-
+                            // Nếu là số thì parseInt (trừ description để giữ nguyên text)
                             if (
-                                row
-                                    .data()
-                                    .branch.split(",")
-                                    .map((item) => item.trim())
-                                    .includes(optionText)
+                                [
+                                    "quantity",
+                                    "hourly_rate",
+                                    "full_day_rate",
+                                ].includes(column)
                             ) {
-                                hasMatch = true;
-                                element.classList.add("active");
+                                value = parseInt(value);
+                            }
+
+                            // Nếu là textarea
+                            if (column === "description" || column === "note") {
+                                $(
+                                    `#update-item-modal form textarea[name="${column}"]`
+                                ).val(value);
+                            }
+                            // Nếu là select
+                            else if (
+                                column === "status" ||
+                                column.endsWith("_id")
+                            ) {
+                                $(
+                                    `#update-item-modal form select[name="${column}"] option`
+                                ).each(function () {
+                                    if ($(this).text().trim() === value) {
+                                        $(this).prop("selected", true);
+                                    }
+                                });
+                            }
+                            // Mặc định là input
+                            else {
+                                $(
+                                    `#update-item-modal form input[name="${column}"]`
+                                ).val(value);
                             }
                         });
-                        if (hasMatch) {
-                            updateSelectedOptions(
-                                document.querySelector(
-                                    "#update-branches.custom-select"
-                                )
-                            );
+
+                        if (
+                            activeTab === "roomType" &&
+                            $(".custom-select").length
+                        ) {
+                            let hasMatch = false;
+                            $(
+                                "#update-branch-list.custom-select .options .option"
+                            ).each((index, element) => {
+                                let optionText = $(element).text().trim();
+
+                                if (
+                                    row
+                                        .data()
+                                        .branch.split(",")
+                                        .map((item) => item.trim())
+                                        .includes(optionText)
+                                ) {
+                                    hasMatch = true;
+                                    element.classList.add("active");
+                                }
+                            });
+                            if (hasMatch) {
+                                updateSelectedOptions(
+                                    document.querySelector(
+                                        "#update-branch-list.custom-select"
+                                    )
+                                );
+                            }
+                        } else if (activeTab === "room") {
+                            // single select branch
+                            $(
+                                `#update-item-modal form select[name="branch_id"] option`
+                            ).each(function () {
+                                if ($(this).text().trim() === row.data()["branch"]) {
+                                    $(this).prop("selected", true);
+                                }
+                            });
                         }
                     }
                 );
@@ -165,23 +200,23 @@ function bindDetailRowToTables(dataTables) {
 
                             // Gán action vào form
                             document
-                                .getElementById("update-room-type")
+                                .getElementById("update-item-modal")
                                 .querySelector("form").action = document
-                                .getElementById("update-room-type")
+                                .getElementById("update-item-modal")
                                 .querySelector("form")
                                 .action.replace("id", id);
 
                             document
-                                .getElementById("delete-room-type")
+                                .getElementById("delete-item-modal")
                                 .querySelector("form").action = document
-                                .getElementById("delete-room-type")
+                                .getElementById("delete-item-modal")
                                 .querySelector("form")
                                 .action.replace("id", id);
 
                             document
-                                .getElementById("update-room-type-status")
+                                .getElementById("update-status-modal")
                                 .querySelector("form").action = document
-                                .getElementById("update-room-type-status")
+                                .getElementById("update-status-modal")
                                 .querySelector("form")
                                 .action.replace("id", id);
                         });
@@ -241,7 +276,9 @@ function bindFilterBranchToTables(filterSelector, dataTables) {
     $(filterSelector).on("click", function (event) {
         let clickElement = event.target.closest(".option");
         if (clickElement) {
-            let sortBranch = updateSelectedOptions(document.querySelector(filterSelector)).join("|");
+            let sortBranch = updateSelectedOptions(
+                document.querySelector(filterSelector)
+            ).join("|");
             dataTables.forEach((table) => {
                 const branchColumnIndex = findColumnIndexByName(
                     table.table().node(),
@@ -257,7 +294,9 @@ function bindFilterBranchToTables(filterSelector, dataTables) {
     });
 
     $(filterSelector).on("removeTagDone", function () {
-        let sortBranch = updateSelectedOptions(document.querySelector(filterSelector)).join("|");
+        let sortBranch = updateSelectedOptions(
+            document.querySelector(filterSelector)
+        ).join("|");
         dataTables.forEach((table) => {
             const branchColumnIndex = findColumnIndexByName(
                 table.table().node(),
@@ -361,6 +400,4 @@ document.addEventListener("DOMContentLoaded", function () {
         roomTable,
         roomTypeTable,
     ]);
-
-    console.log(findColumnIndexByName(roomTypeTable.table().node(), "branch"));
 });

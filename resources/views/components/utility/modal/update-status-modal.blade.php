@@ -1,5 +1,7 @@
+@props(['id' => 'update-status-modal'])
+
 {{-- modal update room type status--}}
-<div class="modal fade" id="update-room-type-status" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade" id="{{ $id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel">
     <div class="modal-dialog">
         <div class="modal-content">

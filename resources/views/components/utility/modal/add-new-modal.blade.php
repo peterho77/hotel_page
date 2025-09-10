@@ -1,4 +1,4 @@
-@props(['id', 'item', 'columns', 'branchList'])
+@props(['id', 'item', 'columns'])
 
 {{-- modal add new  --}}
 <div class="modal fade" id="{{ $id }}" tabindex="-1" aria-labelledby="{{ $id . '-label' }}" aria-hidden="true">
@@ -35,6 +35,14 @@
                                     </select>
                                 </div>
                             </div>
+                        @elseif ($column == "description" || $column == "note")
+                            <div class="mb-3 row">
+                                <label for="{{ $column }}"
+                                    class="col-sm-2 col-md-3 col-lg-4 col-form-label">{{ ucwords(str_replace('_', ' ', $column)) }}</label>
+                                <div class="col-sm-10 col-sm-9 col-lg-8">
+                                    <textarea class="form-control" name="{{ $column }}"></textarea>
+                                </div>
+                            </div>
                         @else
                             <div class="mb-3 row">
                                 <label for="{{ $column }}"
@@ -52,13 +60,13 @@
 
                     @if ($item == "room")
                         <x-utility.single-select-tag label="Room Type" name="room_type_id" :list="$attributes->get('selectList')"/>
-                        <x-utility.single-select-tag label="Branch" name="branch_id" :list="$branchList"/>
+                        <x-utility.single-select-tag label="Branch" name="branch_id" :list="$attributes->get('branchList')"/>
                     @elseif ($item == "room_type")
                         <div class="mb-3 row">
                             <label for="add_branches" class="col-sm-2 col-md-3 col-lg-4 col-form-label">
                                 Branch</label>
                             <div class="col-sm-10 col-sm-9 col-lg-8">
-                                <x-utility.multiple-select-tag :list="$branchList" name="branch_id" placeholder="Chọn chi nhánh..." />
+                                <x-utility.multiple-select-tag :list="$attributes->get('branchList')" name="branch_id" placeholder="Chọn chi nhánh..." />
                             </div>
                         </div>
                     @endif

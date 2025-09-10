@@ -20,7 +20,7 @@ class RoomTypeController extends Controller
             $columns = array_diff($columns, ['id']);
         }
         $branchList = Branch::all();
-        return view('pages.admin.room_management', ["roomTypeList" => $roomTypeList, "columns" => $columns, "branchList" => $branchList, "activeTab" => "roomType"]);
+        return view('pages.admin.room_management', ["roomTypeList" => $roomTypeList, "columns" => $columns, "branchList" => $branchList, "activeTab" => "room_type"]);
     }
 
     /**
@@ -81,7 +81,6 @@ class RoomTypeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
         $validated = $request->validate([
             'name' => 'required',
             'description' => 'required',
