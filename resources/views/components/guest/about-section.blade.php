@@ -1,4 +1,4 @@
-<section class="about | padding-block-1000 section-divider">
+<section class="about-section | padding-block-1000 section-divider">
     <div class="container">
         <div class="row row-gap-4">
             <div class="col-lg-6 | align-center justify-center">

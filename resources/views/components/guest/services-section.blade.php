@@ -1,4 +1,4 @@
-<section class="services | padding-block-1000">
+<section class="services-section | padding-block-1000">
     <div class="container">
         <div class="services__title | text-center flow" style="--flow-spacer:1rem">
             <span class="label">What we do</span>

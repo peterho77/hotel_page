@@ -10,10 +10,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+// Route user 
 Route::redirect('/', '/home');
-Route::get('/home', function () {
-    return view('pages.guest.home');
+
+Route::prefix('home')->group(function () {
+    Route::get('/', function () {
+        return view('pages.guest.home');
+    })->name('home-page');
+    Route::get('/rooms', function () {
+        return view('pages.guest.room');
+    })->name('room-page');
 });
 
 // Admin route chưa có auth middleware

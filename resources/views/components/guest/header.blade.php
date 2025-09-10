@@ -85,8 +85,8 @@
 
                     </div>
                     <ul class="nav-list" role="list">
-                        <li><a href=""><span>{{__('header.guest.home')}}</span></a></li>
-                        <li><a href=""><span>{{__('header.guest.rooms')}}</span></a></li>
+                        <li><a href="{{ route('home-page') }}"><span>{{__('header.guest.home')}}</span></a></li>
+                        <li><a href="{{ route('room-page') }}"><span>{{__('header.guest.rooms')}}</span></a></li>
                         <li><a href=""><span>{{__('header.guest.aboutUs')}}</span></a></li>
                         <li><a href=""><span>{{__('header.guest.pages')}}</span></a></li>
                         <li><a href=""><span>{{__('header.guest.news')}}</span></a></li>
