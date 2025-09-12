@@ -20,6 +20,9 @@ Route::prefix('home')->group(function () {
     Route::get('/rooms', function () {
         return view('pages.guest.room');
     })->name('room-page');
+    Route::get('/about-us', function () {
+        return view('pages.guest.about-us');
+    })->name('about-us-page');
 });
 
 // Admin route chưa có auth middleware

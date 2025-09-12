@@ -293,7 +293,7 @@
 
 // room section
 .room-section,
-.full-room-section {
+.room-page-section {
     .room {
         &-item {
             &__price {
@@ -354,17 +354,91 @@
     }
 }
 
-.full-room-section {
+.room-page-section {
     .room {
         &-item {
             color: var(--neutral-color-800);
-            border-radius: var(--size-200);
+            border-radius: var(--size-300);
             border: 1px solid var(--neutral-color-300);
+            overflow: hidden;
 
-            &__image{
-                img{
+            &__image {
+                img {
                     object-fit: cover;
                     width: 100%;
+                }
+            }
+        }
+    }
+}
+
+// gallery section
+.gallery-section {
+    .gallery {
+        &-item {
+            border-radius: var(--size-200);
+            overflow: hidden;
+            height: var(--bg-item-height, 100%);
+            position: relative;
+
+            &__content {
+                position: absolute;
+                inset: 0;
+                opacity:0;
+                transition: all 300ms;
+                span {
+                    color: var(--neutral-color-150);
+                    font-size: var(--fs-800);
+                }
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    inset: 0 auto auto 0;
+                    width: 100%;
+                    height: 100%;
+                    background: hsla(240, 2%, 10%, 0.3);
+                    opacity:0;
+                }
+
+                &:hover, &:hover::after{
+                    opacity:1;
+                }
+            }
+        }
+    }
+}
+
+// about us page
+.about-us-page-section {
+    .about-us {
+        &__services-list {
+            li {
+                gap: var(--size-200);
+
+                span {
+                    font-size: 1.25rem;
+                }
+            }
+        }
+
+        &__services {
+            --item-height: 420px;
+
+            &-item {
+                height: var(--item-height);
+                border-radius: var(--size-200);
+                overflow: hidden;
+                position: relative;
+
+                &-title {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    text-align: center;
+                    bottom: var(--size-600);
+                    color: var(--neutral-color-150);
+                    font-size: var(--fs-800);
                 }
             }
         }
@@ -393,7 +467,6 @@
             --letter-input: 360px;
 
             .letter-form {
-                margin-inline: auto;
                 width: var(--letter-input);
                 position: relative;
                 height: 40px;

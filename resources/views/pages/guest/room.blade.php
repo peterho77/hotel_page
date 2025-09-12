@@ -4,7 +4,7 @@
         'Rooms' => route('room-page')
     ]" />
 
-    <div class="full-room-section | padding-block-400">
+    <div class="room-page-section | padding-block-400">
         <div class="container">
             <ul class="room-list | row">
                 <li class="col-lg-4 col-md-6">

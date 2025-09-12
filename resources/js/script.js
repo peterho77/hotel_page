@@ -65,6 +65,10 @@ $(function () {
     // set background image
     $(".set-bg-img").each(function () {
         var url = $(this).data("set-bg");
+        // đảm bảo đường dẫn luôn từ root /
+        if (!url.startsWith("http")) {
+            url = "/" + url.replace(/^\/+/, "");
+        }
         $(this).css("background-image", "url(" + url + ")");
     });
 });

@@ -1,6 +1,6 @@
 <section class="room-section | padding-block-600">
     <div class="container-fluid">
-        <div class="row">
+        <div class="row row-gap-3">
             <div class="col-lg-3 col-md-6">
                 <div class="room-item | set-bg-img pop-up" data-set-bg="./img/room/room-b1.jpg">
                     <div class="room-item__content | padding-block-400 flow item-pop-up" style="--flow-spacer:1em">
